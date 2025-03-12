@@ -3,7 +3,6 @@
   "private": true,
   "version": "1.0.0",
   "description": "Portfolio project",
-  "main": "index.js",
   "type": "module",
   "scripts": {
     "dev": "vite",

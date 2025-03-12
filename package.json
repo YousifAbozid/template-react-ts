@@ -8,15 +8,15 @@
   "scripts": {
     "dev": "vite",
     "build": "tsc -b && vite build",
-    "lint": "eslint . --ext .js,.jsx,.ts,.tsx",
-    "lint:fix": "eslint . --ext .js,.jsx,.ts,.tsx --fix",
+    "lint": "eslint .",
+    "lint:fix": "eslint . --fix",
     "format": "prettier --write \"**/*.{js,jsx,ts,tsx,json,md}\"",
     "format:check": "prettier --check \"**/*.{js,jsx,ts,tsx,json,md}\"",
     "prepare": "husky install",
     "preview": "vite preview"
   },
   "keywords": [],
-  "author": "",
+  "author": "Yousif Abozid",
   "license": "ISC",
   "dependencies": {
     "@tailwindcss/vite": "^4.0.13",

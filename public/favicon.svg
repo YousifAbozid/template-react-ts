@@ -1,0 +1,15 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100">
+	<!-- Dark background -->
+	<circle cx="50" cy="50" r="48" fill="#20232a" />
+
+	<!-- React orbital rings -->
+	<ellipse cx="50" cy="50" rx="40" ry="15" fill="none" stroke="#61dafb" stroke-width="2.5"
+		transform="rotate(30, 50, 50)" />
+	<ellipse cx="50" cy="50" rx="40" ry="15" fill="none" stroke="#61dafb" stroke-width="2.5"
+		transform="rotate(90, 50, 50)" />
+	<ellipse cx="50" cy="50" rx="40" ry="15" fill="none" stroke="#61dafb" stroke-width="2.5"
+		transform="rotate(150, 50, 50)" />
+
+	<!-- React center dot -->
+	<circle cx="50" cy="50" r="7" fill="#61dafb" />
+</svg>

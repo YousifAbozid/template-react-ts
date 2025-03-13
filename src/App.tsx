@@ -89,8 +89,8 @@ function App() {
                 </div>
 
                 <div className="flex flex-col gap-2">
-                  <div className="bg-l-bg-3 dark:bg-d-bg-3 border-l-4 border-accent-warning p-4">
-                    <p className="text-l-text-1 dark:text-d-text-1">
+                  <div className="bg-accent-warning/10 border-l-4 border-accent-warning p-4">
+                    <p className="text-accent-warning">
                       Warning alert message using theme colors
                     </p>
                   </div>

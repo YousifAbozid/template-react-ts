@@ -4,10 +4,9 @@
   "version": "1.0.0",
   "description": "React + TypeScript + Vite + Tailwind CSS + ESLint + Prettier + Husky + Lint-Staged Template",
   "type": "module",
-  "main": "index.js",
   "repository": {
     "type": "git",
-    "url": ""
+    "url": "https://github.com/YousifAbozid/template-react-ts.git"
   },
   "scripts": {
     "dev": "vite",
@@ -24,7 +23,7 @@
   },
   "keywords": [],
   "author": "Yousif Abozid",
-  "license": "ISC",
+  "license": "MIT",
   "dependencies": {
     "@tailwindcss/vite": "^4.0.14",
     "react": "^19.0.0",

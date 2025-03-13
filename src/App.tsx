@@ -66,7 +66,7 @@ function App() {
                   <button className="bg-l-bg-3 dark:bg-d-bg-3 text-l-text-1 dark:text-d-text-1 hover:bg-l-bg-hover dark:hover:bg-d-bg-hover px-4 py-2 rounded transition-colors">
                     Secondary Button
                   </button>
-                  <button className="border border-accent-1 text-accent-1 hover:bg-accent-1 hover:text-l-text-inv dark:text-d-text-inv px-4 py-2 rounded transition-colors">
+                  <button className="border border-accent-1 text-accent-1 hover:bg-accent-1 hover:text-l-text-inv dark:hover:text-l-text-inv px-4 py-2 rounded transition-colors">
                     Outline Button
                   </button>
                 </div>
@@ -214,13 +214,16 @@ interface ColorSwatchProps {
 }
 
 function ColorSwatch({ name, isDark = false }: ColorSwatchProps) {
-  const colorClass = isDark
-    ? `bg-${name} text-d-text-1`
-    : `bg-${name} text-l-text-1`;
+  // Using inline style with CSS variables instead of dynamic classes
+  const style = {
+    backgroundColor: `var(--color-${name})`,
+    color: isDark ? 'var(--color-d-text-1)' : 'var(--color-l-text-1)',
+  };
 
   return (
     <div
-      className={`h-12 ${colorClass} rounded flex items-center justify-center text-xs`}
+      className="h-12 rounded flex items-center justify-center text-xs"
+      style={style}
     >
       {name}
     </div>

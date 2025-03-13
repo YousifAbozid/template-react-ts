@@ -7,13 +7,13 @@
   "scripts": {
     "dev": "vite",
     "build": "tsc -b && vite build",
+    "preview": "vite preview",
     "lint": "eslint .",
     "lint:fix": "eslint . --fix",
     "format": "prettier --write \"**/*.{js,jsx,ts,tsx,json,md}\"",
     "format:check": "prettier --check \"**/*.{js,jsx,ts,tsx,json,md}\"",
     "fix-all": "npm run lint:fix && npm run format",
-    "prepare": "husky install",
-    "preview": "vite preview"
+    "upgrade": "npx npm-check-updates -u && npm install"
   },
   "keywords": [],
   "author": "Yousif Abozid",

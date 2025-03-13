@@ -1,19 +1,16 @@
-import { useState, useEffect } from 'react';
+import { useEffect } from 'react';
+import useLocalStorage from 'use-local-storage';
 
 import Navbar from './components/Navbar';
 
 function App() {
-  const [darkMode, setDarkMode] = useState(false);
+  // Get system preference for dark/light mode
+  const defaultDark =
+    window.matchMedia &&
+    window.matchMedia('(prefers-color-scheme: dark)').matches;
 
-  // Check system preference for dark mode on load
-  useEffect(() => {
-    if (
-      window.matchMedia &&
-      window.matchMedia('(prefers-color-scheme: dark)').matches
-    ) {
-      setDarkMode(true);
-    }
-  }, []);
+  // Use local storage to persist theme preference
+  const [darkMode, setDarkMode] = useLocalStorage('darkMode', defaultDark);
 
   // Toggle dark mode and update document class
   useEffect(() => {

@@ -1,9 +1,27 @@
+#!/usr/bin/env sh
+. "$(dirname -- "$0")/_/husky.sh"
+
 echo "🔍 Running pre-commit hooks..."
 
+# Run TypeScript type checking first
+echo "🔄 Running TypeScript type check..."
+npx tsc --noEmit || {
+  echo "❌ TypeScript check failed! Fix the type errors above before committing."
+  exit 1
+}
+
+# Run ESLint with strict TypeScript checking
+echo "🔄 Running ESLint type check..."
+npx eslint --max-warnings=0 --ext .js,.jsx,.ts,.tsx src/ || {
+  echo "❌ ESLint check failed! Fix the issues above before committing."
+  exit 1
+}
+
 # Run lint-staged with stricter settings
+echo "🔄 Running lint-staged..."
 npx lint-staged --verbose --no-stash || {
   echo "❌ lint-staged failed. Please fix the issues above and try committing again."
   exit 1
 }
 
-echo "✅ Pre-commit checks passed!"
+echo "✅ All pre-commit checks passed!"

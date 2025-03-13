@@ -18,6 +18,7 @@
     "format": "prettier --write \"**/*.{js,jsx,ts,tsx,json,md}\"",
     "format:check": "prettier --check \"**/*.{js,jsx,ts,tsx,json,md}\"",
     "fix-all": "npm run lint:fix && npm run format",
+    "type-check": "tsc --noEmit --incremental",
     "upgrade": "npx npm-check-updates -u && npm install"
   },
   "keywords": [],
@@ -51,6 +52,7 @@
   },
   "lint-staged": {
     "*.{js,jsx,ts,tsx}": [
+      "tsc-files --noEmit",
       "eslint --fix --max-warnings=0",
       "prettier --write"
     ],

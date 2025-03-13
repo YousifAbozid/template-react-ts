@@ -1,9 +1,4 @@
-echo "🔍 Running pre-commit hooks..."
+#!/usr/bin/env sh
+. "$(dirname -- "$0")/_/husky.sh"
 
-# Run lint-staged with stricter settings
-npx lint-staged --verbose --no-stash || {
-  echo "❌ lint-staged failed. Please fix the issues above and try committing again."
-  exit 1
-}
-
-echo "✅ Pre-commit checks passed!"
+npx lint-staged

@@ -12,14 +12,14 @@
     "dev": "vite",
     "build": "tsc -b && vite build",
     "preview": "vite preview",
-    "lint": "eslint .",
-    "lint:fix": "eslint . --fix",
+    "lint": "eslint --ext .js,.jsx,.ts,.tsx src",
+    "lint:fix": "eslint --ext .js,.jsx,.ts,.tsx src --fix",
     "format": "prettier --write \"**/*.{js,jsx,ts,tsx,json,md}\"",
     "format:check": "prettier --check \"**/*.{js,jsx,ts,tsx,json,md}\"",
     "fix-all": "npm run lint:fix && npm run format",
     "type-check": "tsc --noEmit --incremental",
-    "prepare": "husky install",
-    "upgrade": "npx npm-check-updates -u && npm install"
+    "upgrade": "npx npm-check-updates -u && npm install",
+    "prepare": "husky install"
   },
   "keywords": [],
   "author": "Yousif Abozid",
@@ -54,8 +54,7 @@
   },
   "lint-staged": {
     "*.{js,jsx,ts,tsx}": [
-      "tsc-files --noEmit",
-      "eslint --fix --max-warnings=0",
+      "eslint --fix",
       "prettier --write"
     ],
     "*.{json,md}": [

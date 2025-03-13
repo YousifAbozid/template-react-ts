@@ -5,26 +5,26 @@
 @custom-variant dark (&:where(.dark, .dark *));
 
 @theme {
-  --color-light-background-primary: #ffffff;
-  --color-light-background-secondary: #f6f8fa;
-  --color-light-background-tertiary: #ebedf0;
+	--color-l-bg-1: #ffffff;
+	--color-l-bg-2: #f6f8fa;
+	--color-l-bg-3: #ebedf0;
 
-  --color-light-text-primary: #24292f;
-  --color-light-text-secondary: #57606a;
-  --color-light-text-tertiary: #6e7781;
+	--color-l-text-1: #24292f;
+	--color-l-text-2: #57606a;
+	--color-l-text-3: #6e7781;
 
-  --color-dark-background-primary: #0d1117;
-  --color-dark-background-secondary: #161b22;
-  --color-dark-background-tertiary: #21262d;
+	--color-d-bg-1: #0d1117;
+	--color-d-bg-2: #161b22;
+	--color-d-bg-3: #21262d;
 
-  --color-dark-text-primary: #f0f6fc;
-  --color-dark-text-secondary: #c9d1d9;
-  --color-dark-text-tertiary: #8b949e;
+	--color-d-text-1: #f0f6fc;
+	--color-d-text-2: #c9d1d9;
+	--color-d-text-3: #8b949e;
 
-  --color-accent-primary: #58a6ff;
-  --color-accent-success: #3fb950;
-  --color-accent-warning: #d29922;
-  --color-accent-danger: #f85149;
+	--color-accent-1: #58a6ff;
+	--color-accent-success: #3fb950;
+	--color-accent-warning: #d29922;
+	--color-accent-danger: #f85149;
 }
 
 /*
@@ -36,11 +36,12 @@
   color utility to any element that depends on these defaults.
 */
 @layer base {
-  *,
-  ::after,
-  ::before,
-  ::backdrop,
-  ::file-selector-button {
-    border-color: var(--color-gray-200, currentColor);
-  }
+
+	*,
+	::after,
+	::before,
+	::backdrop,
+	::file-selector-button {
+		border-color: var(--color-gray-200, currentColor);
+	}
 }

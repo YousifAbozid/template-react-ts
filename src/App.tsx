@@ -208,12 +208,8 @@ function FeatureCard({ icon, title, description }: FeatureCardProps) {
   );
 }
 
-interface ColorSwatchProps {
-  name: string;
-  isDark?: boolean;
-}
 
-function ColorSwatch({ name, isDark = false }: ColorSwatchProps): JSX.Element {
+function ColorSwatch({ name, isDark = false }): JSX.Element {
   const colorClass = isDark
     ? `bg-${name} text-d-text-1`
     : `bg-${name} text-l-text-1`;

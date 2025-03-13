@@ -208,6 +208,7 @@ function FeatureCard({ icon, title, description }: FeatureCardProps) {
   );
 }
 
+//hjghgug
 function ColorSwatch({ name, isDark = false }) {
   const colorClass = isDark
     ? `bg-${name} text-d-text-1`

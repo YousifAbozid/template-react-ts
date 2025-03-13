@@ -1,9 +1,14 @@
 {
-  "name": "portfolio",
+  "name": "template-react-ts",
   "private": true,
   "version": "1.0.0",
-  "description": "Portfolio project",
+  "description": "React + TypeScript + Vite + Tailwind CSS + ESLint + Prettier + Husky + Lint-Staged Template",
   "type": "module",
+  "main": "index.js",
+  "repository": {
+    "type": "git",
+    "url": ""
+  },
   "scripts": {
     "dev": "vite",
     "build": "tsc -b && vite build",

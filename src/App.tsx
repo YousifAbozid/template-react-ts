@@ -208,13 +208,15 @@ function FeatureCard({ icon, title, description }: FeatureCardProps) {
   );
 }
 
-function ColorSwatch({ name, isDark = false }) {
+interface ColorSwatchProps {
+  name: string;
+  isDark?: boolean;
+}
+
+function ColorSwatch({ name, isDark = false }: ColorSwatchProps) {
   const colorClass = isDark
     ? `bg-${name} text-d-text-1`
     : `bg-${name} text-l-text-1`;
-  console.log('sdf');
-  const ss = 34;
-  const sds = 343;
 
   return (
     <div

@@ -1,4 +1,4 @@
-# Tailwind CSS v4 Theme Template
+# React 19, TypeScript, Vite, Tailwind CSS v4, Prettier, Eslint and Husky Template
 
 A modern, ready-to-use template for building web applications with React 19, TypeScript, Vite, and Tailwind CSS v4, featuring a comprehensive theming system with dark mode support.
 

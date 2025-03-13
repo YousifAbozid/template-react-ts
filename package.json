@@ -19,6 +19,7 @@
     "format:check": "prettier --check \"**/*.{js,jsx,ts,tsx,json,md}\"",
     "fix-all": "npm run lint:fix && npm run format",
     "type-check": "tsc --noEmit --incremental",
+    "prepare": "husky install",
     "upgrade": "npx npm-check-updates -u && npm install"
   },
   "keywords": [],

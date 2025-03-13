@@ -1,54 +1,75 @@
-# React + TypeScript + Vite
+# Tailwind CSS v4 Theme Template
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+A modern, ready-to-use template for building web applications with Tailwind CSS v4, featuring a comprehensive theming system with dark mode support.
 
-Currently, two official plugins are available:
+## Features
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react/README.md) uses [Babel](https://babeljs.io/) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
+- 🎨 Complete theming system with semantic color variables
+- 🌓 Dark mode support out of the box
+- 📱 Responsive design ready
+- 🚀 Optimized for Tailwind CSS v4
 
-## Expanding the ESLint configuration
+## Theme System
 
-If you are developing a production application, we recommend updating the configuration to enable type-aware lint rules:
+This template includes a carefully crafted theming system with semantic color variables for both light and dark modes.
 
-```js
-export default tseslint.config({
-  extends: [
-    // Remove ...tseslint.configs.recommended and replace with this
-    ...tseslint.configs.recommendedTypeChecked,
-    // Alternatively, use this for stricter rules
-    ...tseslint.configs.strictTypeChecked,
-    // Optionally, add this for stylistic rules
-    ...tseslint.configs.stylisticTypeChecked,
-  ],
-  languageOptions: {
-    // other options...
-    parserOptions: {
-      project: ['./tsconfig.node.json', './tsconfig.app.json'],
-      tsconfigRootDir: import.meta.dirname,
-    },
-  },
-});
+### Color System Structure
+
+Colors are organized in the following categories:
+
+- **Light/Dark Background Colors**: Primary, secondary, tertiary, and hover states
+- **Light/Dark Text Colors**: Primary, secondary, tertiary, and inverted text
+- **Accent Colors**: Primary, secondary, success, warning, danger
+- **Border Colors**: Light and dark mode borders
+- **Shadow Colors**: For consistent box-shadow effects
+
+### How to Use Theme Colors
+
+You can apply theme colors directly using Tailwind utility classes:
+
+```jsx
+// Background colors
+<div className="bg-l-bg-1 dark:bg-d-bg-1">...</div>
+
+// Text colors
+<p className="text-l-text-2 dark:text-d-text-2">...</p>
+
+// Border colors
+<div className="border border-border-l dark:border-border-d">...</div>
+
+// Accent colors
+<button className="bg-accent-1">Primary Action</button>
+<div className="text-accent-success">Success message</div>
 ```
 
-You can also install [eslint-plugin-react-x](https://github.com/Rel1cx/eslint-react/tree/main/packages/plugins/eslint-plugin-react-x) and [eslint-plugin-react-dom](https://github.com/Rel1cx/eslint-react/tree/main/packages/plugins/eslint-plugin-react-dom) for React-specific lint rules:
+## Customizing the Theme
 
-```js
-// eslint.config.js
-import reactX from 'eslint-plugin-react-x';
-import reactDom from 'eslint-plugin-react-dom';
+To customize the theme, modify the color variables in `src/globals.css`:
 
-export default tseslint.config({
-  plugins: {
-    // Add the react-x and react-dom plugins
-    'react-x': reactX,
-    'react-dom': reactDom,
-  },
-  rules: {
-    // other rules...
-    // Enable its recommended typescript rules
-    ...reactX.configs['recommended-typescript'].rules,
-    ...reactDom.configs.recommended.rules,
-  },
-});
+```css
+@theme {
+  /* Light Mode - Background Colors */
+  --color-l-bg-1: #ffffff; /* Your custom color */
+
+  /* Add more custom colors as needed */
+}
 ```
+
+## Getting Started
+
+1. Clone this repository
+2. Install dependencies: `npm install` or `yarn install`
+3. Start the development server: `npm run dev` or `yarn dev`
+4. Start building your project using the theme system
+
+## Dark Mode
+
+This template includes a `ThemeToggle` component that allows users to switch between light and dark modes. The dark mode uses the `dark` class on the HTML element.
+
+## Browser Support
+
+This template works in all modern browsers that support Tailwind CSS v4.
+
+## License
+
+MIT

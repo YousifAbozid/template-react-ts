@@ -5,26 +5,69 @@
 @custom-variant dark (&:where(.dark, .dark *));
 
 @theme {
+	/* Light Mode - Background Colors */
 	--color-l-bg-1: #ffffff;
+	/* Primary background */
 	--color-l-bg-2: #f6f8fa;
+	/* Secondary background */
 	--color-l-bg-3: #ebedf0;
+	/* Tertiary background */
+	--color-l-bg-hover: #f3f4f6;
+	/* Hover state background */
 
+	/* Light Mode - Text Colors */
 	--color-l-text-1: #24292f;
+	/* Primary text */
 	--color-l-text-2: #57606a;
+	/* Secondary text */
 	--color-l-text-3: #6e7781;
+	/* Tertiary/muted text */
+	--color-l-text-inv: #ffffff;
+	/* Inverted text (on dark backgrounds) */
 
+	/* Dark Mode - Background Colors */
 	--color-d-bg-1: #0d1117;
+	/* Primary background */
 	--color-d-bg-2: #161b22;
+	/* Secondary background */
 	--color-d-bg-3: #21262d;
+	/* Tertiary background */
+	--color-d-bg-hover: #30363d;
+	/* Hover state background */
 
+	/* Dark Mode - Text Colors */
 	--color-d-text-1: #f0f6fc;
+	/* Primary text */
 	--color-d-text-2: #c9d1d9;
+	/* Secondary text */
 	--color-d-text-3: #8b949e;
+	/* Tertiary/muted text */
+	--color-d-text-inv: #0d1117;
+	/* Inverted text (on light backgrounds) */
 
+	/* Accent Colors - Mode Independent */
 	--color-accent-1: #58a6ff;
+	/* Primary accent */
+	--color-accent-2: #1f6feb;
+	/* Secondary accent */
 	--color-accent-success: #3fb950;
+	/* Success state */
 	--color-accent-warning: #d29922;
+	/* Warning state */
 	--color-accent-danger: #f85149;
+	/* Danger/error state */
+
+	/* Border Colors */
+	--color-border-l: #d0d7de;
+	/* Light mode border */
+	--color-border-d: #30363d;
+	/* Dark mode border */
+
+	/* Shadow Colors (for box-shadow) */
+	--color-shadow-l: rgba(31, 35, 40, 0.1);
+	/* Light mode shadow */
+	--color-shadow-d: rgba(0, 0, 0, 0.3);
+	/* Dark mode shadow */
 }
 
 /*

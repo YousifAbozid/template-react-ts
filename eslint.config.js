@@ -55,6 +55,20 @@ export default tseslint.config(
       'no-console': ['warn', { allow: ['warn', 'error'] }],
       'no-unused-vars': 'warn',
 
+      // TypeScript rules
+      '@typescript-eslint/explicit-function-return-type': 'off',
+      '@typescript-eslint/explicit-module-boundary-types': 'off',
+      '@typescript-eslint/no-explicit-any': 'warn',
+      '@typescript-eslint/ban-ts-comment': 'warn',
+      '@typescript-eslint/no-inferrable-types': 'warn',
+      '@typescript-eslint/no-non-null-assertion': 'warn',
+      '@typescript-eslint/no-empty-function': 'warn',
+      '@typescript-eslint/no-empty-interface': 'warn',
+      '@typescript-eslint/no-var-requires': 'warn',
+      '@typescript-eslint/prefer-interface': 'off',
+      '@typescript-eslint/prefer-as-const': 'warn',
+      '@typescript-eslint/consistent-type-imports': 'warn',
+
       // Import rules
       'import/order': [
         'error',

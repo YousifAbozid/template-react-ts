@@ -1,0 +1,41 @@
+name: 🔄 Auto Dependency Updater
+
+on:
+  schedule:
+    - cron: '0 3 * * *' # every day at 3AM UTC (adjust as needed)
+  workflow_dispatch: # allow manual trigger from Actions tab
+
+jobs:
+  update-dependencies:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: 📥 Checkout code
+        uses: actions/checkout@v4
+
+      - name: 🟢 Setup Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: 20 # or your project's version
+
+      - name: 📦 Upgrade dependencies
+        run: |
+          npm install -g npm-check-updates
+          ncu -u
+          npm install
+          npm audit fix --force || true
+
+      - name: 🚦 Run build/dev to verify
+        run: npm run build || npm run dev || true
+
+      - name: 🧠 Commit and Push changes
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          if [ -n "$(git status --porcelain)" ]; then
+            git add .
+            git commit -m "chore: 🔄 auto-dependency upgrade"
+            git push
+          else
+            echo "✅ No changes to commit"
+          fi

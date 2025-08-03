@@ -28,44 +28,91 @@ jobs:
         run: |
           set -e  # Exit on any error
 
-          echo "🔍 Backing up original package.json..."
+          # Create logs directory
+          mkdir -p logs
+          LOG_FILE="logs/dependency-update-$(date +%Y%m%d-%H%M%S).log"
+
+          log_with_timestamp() {
+            echo "[$(date '+%Y-%m-%d %H:%M:%S')] $1" | tee -a "$LOG_FILE"
+          }
+
+          log_with_timestamp "🔍 Starting dependency update process..."
+          log_with_timestamp "🔍 Backing up original package.json..."
           cp package.json package.json.backup
 
-          echo "📋 Installing npm-check-updates..."
-          npm install -g npm-check-updates
+          # Log current dependency versions
+          log_with_timestamp "📋 Current dependency versions:"
+          npm list --depth=0 2>/dev/null | tee -a "$LOG_FILE" || echo "Could not list current dependencies" | tee -a "$LOG_FILE"
 
-          echo "🔄 Upgrading dependencies..."
-          ncu -u
+          log_with_timestamp "📋 Installing npm-check-updates..."
+          npm install -g npm-check-updates 2>&1 | tee -a "$LOG_FILE"
 
-          echo "🧪 Testing npm install after upgrades..."
-          if npm install; then
-            echo "✅ npm install succeeded after upgrades"
+          log_with_timestamp "🔄 Checking for available updates..."
+          ncu --format json > logs/available-updates.json 2>/dev/null || echo "{}" > logs/available-updates.json
+          ncu 2>&1 | tee -a "$LOG_FILE"
+
+          log_with_timestamp "🔄 Upgrading dependencies..."
+          ncu -u 2>&1 | tee -a "$LOG_FILE"
+
+          # Log what changed
+          log_with_timestamp "📝 Package.json changes:"
+          if diff package.json.backup package.json > logs/package-diff.txt; then
+            log_with_timestamp "No changes detected in package.json"
           else
-            echo "❌ npm install failed after upgrades - reverting changes"
+            cat logs/package-diff.txt | tee -a "$LOG_FILE"
+          fi
+
+          log_with_timestamp "🧪 Testing npm install after upgrades..."
+          if npm install 2>&1 | tee -a "$LOG_FILE"; then
+            log_with_timestamp "✅ npm install succeeded after upgrades"
+          else
+            log_with_timestamp "❌ npm install failed after upgrades - capturing error details"
+            log_with_timestamp "Error occurred during npm install. Check logs for details."
+            log_with_timestamp "Reverting package.json to original state..."
             cp package.json.backup package.json
             exit 1
           fi
 
-          echo "🔒 Running npm audit fix..."
-          if npm audit fix; then
-            echo "✅ npm audit fix completed"
+          log_with_timestamp "🔒 Running npm audit fix..."
+          if npm audit fix --json 2>&1 | tee logs/audit-results.json | tee -a "$LOG_FILE"; then
+            log_with_timestamp "✅ npm audit fix completed"
           else
-            echo "⚠️ npm audit fix had issues, but continuing..."
+            log_with_timestamp "⚠️ npm audit fix had issues, but continuing..."
           fi
 
-          echo "🧪 Final verification with npm install..."
-          if npm install; then
-            echo "✅ Final npm install verification passed"
+          log_with_timestamp "🧪 Final verification with npm install..."
+          if npm install 2>&1 | tee -a "$LOG_FILE"; then
+            log_with_timestamp "✅ Final npm install verification passed"
+            
+            # Log final dependency versions
+            log_with_timestamp "📋 Final dependency versions:"
+            npm list --depth=0 2>/dev/null | tee -a "$LOG_FILE" || echo "Could not list final dependencies" | tee -a "$LOG_FILE"
           else
-            echo "❌ Final verification failed - reverting changes"
+            log_with_timestamp "❌ Final verification failed - capturing detailed error information"
+            log_with_timestamp "This indicates a dependency conflict or compatibility issue"
+            
+            # Try to get more specific error information
+            log_with_timestamp "🔍 Attempting to diagnose the issue..."
+            npm ls --depth=0 2>&1 | tee -a "$LOG_FILE" || true
+            
+            log_with_timestamp "🔙 Reverting all changes..."
             cp package.json.backup package.json
-            npm install
-            echo "⚠️ Skipping commit due to dependency conflict"
+            npm install 2>&1 | tee -a "$LOG_FILE"
+            log_with_timestamp "⚠️ Dependency update skipped due to conflicts - check logs for details"
             exit 0
           fi
 
-          echo "🧹 Cleaning up backup..."
+          log_with_timestamp "🧹 Cleaning up backup..."
           rm package.json.backup
+          log_with_timestamp "✅ Dependency update process completed successfully"
+
+      - name: 📊 Upload logs as artifacts
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: dependency-update-logs-${{ github.run_number }}
+          path: logs/
+          retention-days: 30
 
       - name: 🧠 Commit and Push changes
         env:

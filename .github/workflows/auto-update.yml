@@ -43,6 +43,8 @@ jobs:
           else
             echo "❌ npm install failed after upgrades - reverting changes"
             cp package.json.backup package.json
+            echo "🧹 Cleaning up backup..."
+            rm -f package.json.backup
             exit 1
           fi
 
@@ -61,11 +63,13 @@ jobs:
             cp package.json.backup package.json
             npm install
             echo "⚠️ Skipping commit due to dependency conflict"
+            echo "🧹 Cleaning up backup..."
+            rm -f package.json.backup
             exit 0
           fi
 
           echo "🧹 Cleaning up backup..."
-          rm package.json.backup
+          rm -f package.json.backup
 
       - name: 🧠 Commit and Push changes
         env:

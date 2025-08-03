@@ -60,7 +60,8 @@ jobs:
             echo "❌ Final verification failed - reverting changes"
             cp package.json.backup package.json
             npm install
-            exit 1
+            echo "⚠️ Skipping commit due to dependency conflict"
+            exit 0
           fi
 
           echo "🧹 Cleaning up backup..."

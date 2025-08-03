@@ -24,12 +24,47 @@ jobs:
         with:
           node-version: 20 # or your project's version
 
-      - name: 📦 Upgrade dependencies
+      - name: 📦 Upgrade dependencies (Fail-Safe)
         run: |
+          set -e  # Exit on any error
+
+          echo "🔍 Backing up original package.json..."
+          cp package.json package.json.backup
+
+          echo "📋 Installing npm-check-updates..."
           npm install -g npm-check-updates
+
+          echo "🔄 Upgrading dependencies..."
           ncu -u
-          npm install
-          npm audit fix --force || true
+
+          echo "🧪 Testing npm install after upgrades..."
+          if npm install; then
+            echo "✅ npm install succeeded after upgrades"
+          else
+            echo "❌ npm install failed after upgrades - reverting changes"
+            cp package.json.backup package.json
+            exit 1
+          fi
+
+          echo "🔒 Running npm audit fix..."
+          if npm audit fix; then
+            echo "✅ npm audit fix completed"
+          else
+            echo "⚠️ npm audit fix had issues, but continuing..."
+          fi
+
+          echo "🧪 Final verification with npm install..."
+          if npm install; then
+            echo "✅ Final npm install verification passed"
+          else
+            echo "❌ Final verification failed - reverting changes"
+            cp package.json.backup package.json
+            npm install
+            exit 1
+          fi
+
+          echo "🧹 Cleaning up backup..."
+          rm package.json.backup
 
       - name: 🧠 Commit and Push changes
         env:
@@ -39,9 +74,11 @@ jobs:
           git config user.email "github-actions[bot]@users.noreply.github.com"
 
           if [ -n "$(git status --porcelain)" ]; then
+            echo "📝 Changes detected, committing..."
             git add .
             git commit -m "chore: 🔄 auto-dependency upgrade"
             git push origin ${{ github.ref_name }}
+            echo "✅ Successfully pushed dependency updates"
           else
             echo "✅ No changes to commit"
           fi

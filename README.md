@@ -33,7 +33,7 @@ This template combines the following technologies to provide a modern developmen
 1. Clone this repository:
 
    ```bash
-   git clone [repository-url] my-project
+   git clone https://github.com/YousifAbozid/template-react-ts my-project
    cd my-project
    ```
 

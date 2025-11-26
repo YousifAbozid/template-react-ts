@@ -10,7 +10,7 @@ A modern, production-ready template for building web applications with React 19,
 | [🚀 Features](#features)                              | Core capabilities and tech stack |
 | [🌐 Technologies](#technologies-used)                 | Complete tech stack overview     |
 | [🏗️ Getting Started](#getting-started)                | Installation and setup           |
-| [📁 Project Structure](#project-structure)            | File organization                |
+| [📁 Project Structure](#-project-structure)           | File organization                |
 | [⚡ Scripts](#available-scripts)                      | Development commands             |
 | [🎯 App Features](#-application-features--demos)      | Live demos and examples          |
 | [🧭 Routing](#-react-router-integration)              | React Router setup               |
@@ -23,9 +23,14 @@ A modern, production-ready template for building web applications with React 19,
 | [🚀 Deployment](#deployment)                          | Deploy guides                    |
 | [📦 Dependencies](#adding-dependencies)               | Package management               |
 | [🧪 Testing](#testing-setup)                          | Testing setup                    |
-| [🆘 Help](#troubleshooting)                           | Troubleshooting                  |
+| [🤝 Contributing](#contributing)                      | Development workflow             |
+| [🆘 Troubleshooting](#troubleshooting)                | Common issues and solutions      |
+| [📄 License](#license)                                | Project license                  |
+| [🙏 Acknowledgments](#acknowledgments)                | Credits and thanks               |
 
 ## ✨ What's New in This Template
+
+[↑ Back to Table of Contents](#-table-of-contents)
 
 This template now includes a complete application structure with:
 
@@ -38,6 +43,8 @@ This template now includes a complete application structure with:
 - 🚀 **Developer experience** enhanced with smart git hooks
 
 ## Features
+
+[↑ Back to Table of Contents](#-table-of-contents)
 
 ### 🎯 Core Application Features
 
@@ -64,6 +71,8 @@ This template now includes a complete application structure with:
 - ⚡ **Performance optimizations** with intelligent caching
 
 ## Technologies Used
+
+[↑ Back to Table of Contents](#-table-of-contents)
 
 This template combines the following technologies to provide a modern development experience:
 
@@ -93,6 +102,8 @@ This template combines the following technologies to provide a modern developmen
 - **Smart git hooks**: Conditional builds and optimized pre-commit checks
 
 ## Getting Started
+
+[↑ Back to Table of Contents](#-table-of-contents)
 
 ### Installation
 
@@ -125,7 +136,9 @@ This template combines the following technologies to provide a modern developmen
 
 4. Open your browser and visit http://localhost:3000
 
-### Project Structure {#project-structure}
+## 📁 Project Structure
+
+[↑ Back to Table of Contents](#-table-of-contents)
 
 ```
 template-react-ts/
@@ -155,6 +168,8 @@ template-react-ts/
 ```
 
 ## Available Scripts
+
+[↑ Back to Table of Contents](#-table-of-contents)
 
 The template includes the following npm scripts organized by category:
 
@@ -193,6 +208,8 @@ The template includes the following npm scripts organized by category:
 > 📋 For detailed performance information, see [PERFORMANCE.md](PERFORMANCE.md)
 
 ## 🚀 Application Features & Demos
+
+[↑ Back to Table of Contents](#-table-of-contents)
 
 This template includes fully functional pages that demonstrate real-world usage patterns:
 
@@ -278,6 +295,8 @@ Reusable components demonstrated throughout the app:
 
 ## 🧭 React Router Integration
 
+[↑ Back to Table of Contents](#-table-of-contents)
+
 The template includes a complete routing setup with React Router v7:
 
 ### Route Structure
@@ -344,6 +363,8 @@ const Layout = () => {
 - **TypeScript**: Fully typed route parameters and navigation
 
 ## 🔄 React Query Setup
+
+[↑ Back to Table of Contents](#-table-of-contents)
 
 Complete server state management with TanStack Query:
 
@@ -414,6 +435,8 @@ const useCreatePost = () => {
 ```
 
 ## 📝 Form Handling with React Hook Form & Zod
+
+[↑ Back to Table of Contents](#-table-of-contents)
 
 Type-safe form validation with excellent performance:
 
@@ -498,6 +521,8 @@ const RegistrationForm = () => {
 - **Accessibility**: Proper ARIA labels and error associations
 
 ## Theme System
+
+[↑ Back to Table of Contents](#-table-of-contents)
 
 This template includes a comprehensive theming system with semantic color variables designed for both light and dark modes. The system provides a foundation for consistent UI design and easy customization.
 
@@ -1024,6 +1049,8 @@ This comprehensive theming system provides the foundation for creating beautiful
 
 ## Dark Mode Implementation
 
+[↑ Back to Table of Contents](#-table-of-contents)
+
 This template includes a ready-to-use dark mode implementation:
 
 1. **Theme Toggle Component**: Located at `src/components/ThemeToggle.tsx`, this component provides a button to switch between light and dark modes.
@@ -1052,6 +1079,8 @@ function MyComponent() {
 ## 🛠️ Development & Deployment
 
 ### Development Tools
+
+[↑ Back to Table of Contents](#-table-of-contents)
 
 ### ESLint Configuration with Caching
 
@@ -1144,6 +1173,8 @@ The template uses optimized git hooks for maximum development speed:
 This ensures that all committed code meets quality standards without slowing down development.
 
 ## ⚡ Performance Optimizations
+
+[↑ Back to Table of Contents](#-table-of-contents)
 
 This template is built with performance in mind, including both runtime and development-time optimizations:
 
@@ -1262,6 +1293,8 @@ export default defineConfig({
 
 ## Deployment
 
+[↑ Back to Table of Contents](#-table-of-contents)
+
 ### Build for Production
 
 ```bash
@@ -1363,6 +1396,8 @@ src/
 
 ## Adding Dependencies
 
+[↑ Back to Table of Contents](#-table-of-contents)
+
 ### ✅ Already Included in This Template
 
 The following popular dependencies are **already configured and ready to use**:
@@ -1434,6 +1469,8 @@ npm install @react-spring/web
 
 ## Testing Setup
 
+[↑ Back to Table of Contents](#-table-of-contents)
+
 While not included by default, you can easily add testing:
 
 ### Vitest (recommended for Vite projects)
@@ -1464,6 +1501,8 @@ npm install --save-dev @testing-library/react @testing-library/jest-dom
 
 ## Contributing
 
+[↑ Back to Table of Contents](#-table-of-contents)
+
 ### Development Workflow
 
 1. Fork the repository
@@ -1486,6 +1525,8 @@ npm install --save-dev @testing-library/react @testing-library/jest-dom
 - Keep components small and focused
 
 ## Troubleshooting
+
+[↑ Back to Table of Contents](#-table-of-contents)
 
 ### Common Issues
 
@@ -1532,9 +1573,13 @@ npm run build
 
 ## License
 
+[↑ Back to Table of Contents](#-table-of-contents)
+
 This project is licensed under the MIT License - see the [LICENSE](LICENSE) file for details.
 
 ## Acknowledgments
+
+[↑ Back to Table of Contents](#-table-of-contents)
 
 - **React Team** for the amazing React 19 release with improved performance
 - **React Router Team** for the powerful v7 routing solution

@@ -61,6 +61,27 @@ export interface ToastMessage {
   };
 }
 
+// Storage Types
+export interface StorageError {
+  message: string;
+  key: string;
+  operation: 'read' | 'write' | 'delete';
+}
+
+export type StorageHookReturn<T> = [
+  value: T,
+  setValue: (value: T | ((prevValue: T) => T)) => void,
+  removeValue: () => void,
+];
+
+export type SecureStorageHookReturn = [
+  value: string,
+  setValue: (value: string) => Promise<void>,
+  removeValue: () => void,
+  isLoading: boolean,
+  error: Error | null,
+];
+
 // Generic utility types
 export type Optional<T, K extends keyof T> = Omit<T, K> & Partial<Pick<T, K>>;
 export type RequiredFields<T, K extends keyof T> = T & Required<Pick<T, K>>;

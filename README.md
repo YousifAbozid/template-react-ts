@@ -20,6 +20,7 @@ A modern, production-ready template for building web applications with React 19,
 | [🌓 Dark Mode](#dark-mode-implementation)             | Dark mode setup                  |
 | [🛠️ Dev Tools](#development-tools)                    | ESLint, Prettier, git hooks      |
 | [⚡ Performance](#-performance-optimizations)         | Speed optimizations              |
+| [💾 Storage](#-storage-hooks)                         | Local and secure storage hooks   |
 | [🚀 Deployment](#deployment)                          | Deploy guides                    |
 | [📦 Dependencies](#adding-dependencies)               | Package management               |
 | [🧪 Testing](#testing-setup)                          | Testing setup                    |
@@ -1504,6 +1505,102 @@ npm install @radix-ui/react-dialog @radix-ui/react-dropdown-menu
 # shadcn/ui (pre-built components)
 npx shadcn-ui@latest init
 ```
+
+## 💾 Storage Hooks
+
+[↑ Back to Table of Contents](#-table-of-contents)
+
+This template includes powerful storage hooks for data persistence:
+
+### useLocalStorage Hook
+
+For storing data in localStorage with automatic JSON serialization:
+
+```tsx
+import { useLocalStorage } from '@/hooks';
+
+const MyComponent = () => {
+  const [user, setUser, removeUser] = useLocalStorage('user', {
+    name: '',
+    email: '',
+  });
+
+  return (
+    <div>
+      <p>Welcome, {user.name}!</p>
+      <button
+        onClick={() => setUser({ name: 'John', email: 'john@example.com' })}
+      >
+        Set User
+      </button>
+      <button onClick={removeUser}>Clear User</button>
+    </div>
+  );
+};
+```
+
+**Features:**
+
+- Type-safe with TypeScript generics
+- Automatic JSON serialization/deserialization
+- Cross-tab synchronization
+- Error handling for corrupted data
+- SSR-safe initialization
+
+### useSecureStorage Hook
+
+For storing sensitive data with AES-GCM encryption:
+
+```tsx
+import { useSecureStorage } from '@/hooks';
+
+const SecureComponent = () => {
+  const [token, setToken, removeToken, isLoading, error] =
+    useSecureStorage('auth-token');
+
+  const saveToken = async () => {
+    await setToken('sensitive-jwt-token-here');
+  };
+
+  if (isLoading) return <div>Loading...</div>;
+  if (error) return <div>Error: {error.message}</div>;
+
+  return (
+    <div>
+      <p>Token: {token ? '***ENCRYPTED***' : 'No token'}</p>
+      <button onClick={saveToken}>Save Token</button>
+      <button onClick={removeToken}>Clear Token</button>
+    </div>
+  );
+};
+```
+
+**Features:**
+
+- Web Crypto API encryption (AES-GCM with PBKDF2)
+- Automatic encryption/decryption
+- Configurable via environment variables
+- Loading states and error handling
+- Secure by default with development fallbacks
+
+### Environment Configuration
+
+The secure storage hook uses environment variables for encryption keys:
+
+```bash
+# .env (development)
+VITE_ENCRYPTION_SECRET=your-development-encryption-key
+
+# .env.production (production)
+VITE_ENCRYPTION_SECRET=your-strong-production-encryption-key-here
+```
+
+**Security Best Practices:**
+
+- Use a strong, randomly generated secret in production
+- Never commit production secrets to version control
+- Generate keys with: `openssl rand -base64 32`
+- Rotate encryption keys periodically
 
 #### Animations
 

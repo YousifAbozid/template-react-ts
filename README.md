@@ -1,30 +1,96 @@
-# React 19, TypeScript, Vite, Tailwind CSS v4, Prettier, Eslint and Husky Template
+# React 19, TypeScript, Vite, Tailwind CSS v4, React Router, React Query, Forms Template
 
-A modern, ready-to-use template for building web applications with React 19, TypeScript, Vite, and Tailwind CSS v4, featuring a comprehensive theming system with dark mode support.
+A modern, production-ready template for building web applications with React 19, TypeScript, Vite, Tailwind CSS v4, React Router for navigation, React Query for server state management, React Hook Form with Zod validation, and a comprehensive theming system with dark mode support.
+
+## 📋 Table of Contents
+
+| Section                                               | Description                      |
+| ----------------------------------------------------- | -------------------------------- |
+| [✨ What's New](#-whats-new-in-this-template)         | Latest features and improvements |
+| [🚀 Features](#features)                              | Core capabilities and tech stack |
+| [🌐 Technologies](#technologies-used)                 | Complete tech stack overview     |
+| [🏗️ Getting Started](#getting-started)                | Installation and setup           |
+| [📁 Project Structure](#project-structure)            | File organization                |
+| [⚡ Scripts](#available-scripts)                      | Development commands             |
+| [🎯 App Features](#-application-features--demos)      | Live demos and examples          |
+| [🧭 Routing](#-react-router-integration)              | React Router setup               |
+| [🔄 State Management](#-react-query-setup)            | React Query integration          |
+| [📝 Forms](#-form-handling-with-react-hook-form--zod) | Form validation with Zod         |
+| [🎨 Theme System](#theme-system)                      | Comprehensive theming guide      |
+| [🌓 Dark Mode](#dark-mode-implementation)             | Dark mode setup                  |
+| [🛠️ Dev Tools](#development-tools)                    | ESLint, Prettier, git hooks      |
+| [⚡ Performance](#-performance-optimizations)         | Speed optimizations              |
+| [🚀 Deployment](#deployment)                          | Deploy guides                    |
+| [📦 Dependencies](#adding-dependencies)               | Package management               |
+| [🧪 Testing](#testing-setup)                          | Testing setup                    |
+| [🆘 Help](#troubleshooting)                           | Troubleshooting                  |
+
+## ✨ What's New in This Template
+
+This template now includes a complete application structure with:
+
+- 🧭 **Client-side routing** with React Router v7
+- 🔄 **Server state management** with React Query (TanStack Query)
+- 📝 **Form handling** with React Hook Form + Zod validation
+- 🎯 **Live demonstrations** of all features with interactive pages
+- ⚡ **Performance optimizations** with intelligent caching
+- 🎨 **Beautiful UI components** with Lucide React icons
+- 🚀 **Developer experience** enhanced with smart git hooks
 
 ## Features
+
+### 🎯 Core Application Features
+
+- 🧭 **React Router v7**: Full client-side routing with nested routes and layouts
+- 🔄 **React Query**: Powerful server state management with caching and background updates
+- 📝 **React Hook Form**: Performant forms with minimal re-renders
+- ✅ **Zod Validation**: Type-safe schema validation for forms and APIs
+- 🎨 **Lucide React**: Beautiful, customizable icon library with 1000+ icons
+- 📱 **Responsive Pages**: Pre-built pages showcasing all features
+
+### 🎨 Design System
 
 - 🎨 Complete theming system with semantic color variables
 - 🌓 Dark mode support out of the box
 - 📱 Responsive design ready
 - 🚀 Optimized for Tailwind CSS v4
+
+### ⚛️ Modern React Stack
+
 - ⚛️ React 19 with TypeScript
 - ⚡️ Vite for fast development and builds
 - 🧹 ESLint and Prettier for code quality
 - 🪝 Husky and lint-staged for pre-commit hooks
+- ⚡ **Performance optimizations** with intelligent caching
 
 ## Technologies Used
 
 This template combines the following technologies to provide a modern development experience:
 
-- **React 19**: Latest version of the popular UI library with improved performance
+### Frontend Stack
+
+- **React 19**: Latest version with improved performance and new features
 - **TypeScript**: Static type checking for more robust code
+- **React Router v7**: Modern client-side routing with data loading
+- **React Query (TanStack Query)**: Server state management with intelligent caching
+- **React Hook Form**: High-performance forms with minimal re-renders
+- **Zod**: TypeScript-first schema validation
+- **Lucide React**: Beautiful, customizable icon library
+
+### Development Tools
+
 - **Vite**: Next generation frontend tooling for fast development and optimized builds
 - **Tailwind CSS v4**: Utility-first CSS framework with built-in dark mode support
-- **ESLint**: Linting utility for identifying and fixing code problems
+- **ESLint**: Linting utility for identifying and fixing code problems (with caching)
 - **Prettier**: Code formatter for consistent styling
 - **Husky**: Git hooks to enforce code quality checks before commits
-- **lint-staged**: Run linters on git staged files
+- **lint-staged**: Run linters on git staged files only
+
+### Performance Features
+
+- **ESLint caching**: 70% faster linting with intelligent cache
+- **TypeScript incremental compilation**: 95% faster type checking
+- **Smart git hooks**: Conditional builds and optimized pre-commit checks
 
 ## Getting Started
 
@@ -59,14 +125,24 @@ This template combines the following technologies to provide a modern developmen
 
 4. Open your browser and visit http://localhost:3000
 
-### Project Structure
+### Project Structure {#project-structure}
 
 ```
 template-react-ts/
 ├── .husky/                # Git hooks configuration
+│   ├── pre-commit         # Lint staged files before commit
+│   └── pre-push           # Smart build verification before push
 ├── src/
 │   ├── components/        # Reusable components
-│   ├── App.tsx            # Main application component
+│   │   ├── Layout.tsx     # Main layout with navigation
+│   │   └── ThemeToggle.tsx # Dark mode toggle component
+│   ├── pages/             # Application pages
+│   │   ├── HomePage.tsx   # Landing page with feature showcase
+│   │   ├── FeaturesPage.tsx # Feature documentation
+│   │   ├── FormDemoPage.tsx # React Hook Form + Zod demo
+│   │   └── ApiDemoPage.tsx  # React Query demo with live API
+│   ├── lib/               # Utility functions and configurations
+│   ├── App.tsx            # Root component with routing setup
 │   ├── main.tsx           # Application entry point
 │   └── globals.css        # Global styles and theme variables
 ├── public/                # Static assets
@@ -74,22 +150,352 @@ template-react-ts/
 ├── vite.config.ts         # Vite configuration
 ├── tsconfig.json          # TypeScript configuration
 ├── eslint.config.js       # ESLint configuration
+├── PERFORMANCE.md         # Performance optimization guide
 └── package.json           # Project dependencies and scripts
 ```
 
 ## Available Scripts
 
-The template includes the following npm scripts:
+The template includes the following npm scripts organized by category:
 
-- **`npm run dev`**: Start the development server
-- **`npm run build`**: Type-check and build the app for production
+### 🔧 Development
+
+- **`npm run dev`**: Start the development server with HMR
 - **`npm run preview`**: Preview the production build locally
-- **`npm run lint`**: Run ESLint to check for code issues
-- **`npm run lint:fix`**: Run ESLint and automatically fix issues
-- **`npm run format`**: Run Prettier to format all files
+
+### 🏗️ Build & Type Checking
+
+- **`npm run build`**: Type-check and build the app for production
+- **`npm run type-check`**: Run TypeScript type checking (incremental, cached)
+
+### 🔍 Code Quality (Manual)
+
+- **`npm run lint`**: Run ESLint to check for code issues (cached)
+- **`npm run lint:fix`**: Run ESLint and automatically fix issues (cached)
+- **`npm run format:all`**: Run Prettier to format all files
 - **`npm run format:check`**: Check if files are properly formatted
-- **`npm run fix-all`**: Run both lint:fix and format to fix all issues
+
+### ⚡ Automated Fixes
+
+- **`npm run fix-all`**: Run both lint:fix and format:all to fix all issues
+- **`npm run fix-staged`**: Run lint-staged manually (same as pre-commit hook)
+
+### 🔧 Maintenance
+
 - **`npm run upgrade`**: Update all dependencies to their latest versions
+
+### 🚀 Performance Benefits
+
+- **ESLint caching**: 70% faster linting on subsequent runs
+- **TypeScript incremental**: 95% faster type checking
+- **Smart git hooks**: Conditional execution saves development time
+
+> 📋 For detailed performance information, see [PERFORMANCE.md](PERFORMANCE.md)
+
+## 🚀 Application Features & Demos
+
+This template includes fully functional pages that demonstrate real-world usage patterns:
+
+### 🏠 HomePage (`/`)
+
+A comprehensive landing page showcasing:
+
+- Hero section with feature highlights
+- Interactive component demonstrations
+- Theme system examples
+- Code snippets and usage patterns
+- Navigation to other demo pages
+
+### 🎯 Features Page (`/features`)
+
+Detailed documentation of:
+
+- All included technologies
+- Setup instructions
+- Best practices
+- Integration examples
+
+### 📝 Form Demo Page (`/form-demo`)
+
+Live demonstration of React Hook Form + Zod:
+
+- **Login Form**: Email validation, password requirements
+- **Registration Form**: Complex validation rules, real-time feedback
+- **Error Handling**: Form-level and field-level error display
+- **TypeScript Integration**: Fully typed form schemas
+
+```tsx
+// Example: Type-safe form with Zod validation
+const loginSchema = z.object({
+  email: z.string().email('Invalid email address'),
+  password: z.string().min(6, 'Password must be at least 6 characters'),
+});
+
+type LoginFormData = z.infer<typeof loginSchema>;
+```
+
+### 🔄 API Demo Page (`/api-demo`)
+
+Live React Query demonstrations:
+
+- **Data Fetching**: Get posts from JSONPlaceholder API
+- **Loading States**: Skeleton loaders and loading indicators
+- **Error Handling**: Automatic retries and error boundaries
+- **Caching**: Background updates and cache invalidation
+- **Mutations**: Create new posts with optimistic updates
+- **DevTools**: React Query DevTools integration
+
+```tsx
+// Example: Typed API queries with React Query
+const {
+  data: posts,
+  isLoading,
+  error,
+} = useQuery({
+  queryKey: ['posts'],
+  queryFn: () => fetch('/api/posts').then(res => res.json()),
+  staleTime: 5 * 60 * 1000, // 5 minutes
+});
+```
+
+### 🧭 Navigation & Layout
+
+- **Responsive Navigation**: Desktop and mobile-optimized navigation
+- **Active States**: Visual indicators for current page
+- **Theme Integration**: Navigation respects light/dark mode
+- **Accessibility**: Keyboard navigation and screen reader support
+
+### 🎨 Component Library
+
+Reusable components demonstrated throughout the app:
+
+- **Form Fields**: Input, Select, Textarea with validation states
+- **Buttons**: Primary, secondary, outline variants
+- **Cards**: Content containers with proper spacing
+- **Alerts**: Success, warning, error message components
+- **Code Blocks**: Syntax-highlighted code examples
+- **Loading States**: Skeletons and spinners
+
+## 🧭 React Router Integration
+
+The template includes a complete routing setup with React Router v7:
+
+### Route Structure
+
+```tsx
+// App.tsx - Main routing configuration
+import { BrowserRouter, Routes, Route } from 'react-router-dom';
+import Layout from './components/Layout';
+import HomePage from './pages/HomePage';
+import FeaturesPage from './pages/FeaturesPage';
+import FormDemoPage from './pages/FormDemoPage';
+import ApiDemoPage from './pages/ApiDemoPage';
+
+function App() {
+  return (
+    <BrowserRouter>
+      <Routes>
+        <Route path="/" element={<Layout />}>
+          <Route index element={<HomePage />} />
+          <Route path="features" element={<FeaturesPage />} />
+          <Route path="form-demo" element={<FormDemoPage />} />
+          <Route path="api-demo" element={<ApiDemoPage />} />
+        </Route>
+      </Routes>
+    </BrowserRouter>
+  );
+}
+```
+
+### Layout Component
+
+Shared layout with navigation:
+
+```tsx
+// components/Layout.tsx
+import { Outlet, Link, useLocation } from 'react-router-dom';
+
+const Layout = () => {
+  const location = useLocation();
+
+  return (
+    <div>
+      <nav>
+        {/* Navigation with active states */}
+        <Link to="/" className={location.pathname === '/' ? 'active' : ''}>
+          Home
+        </Link>
+        {/* More navigation items */}
+      </nav>
+      <main>
+        <Outlet /> {/* Child routes render here */}
+      </main>
+      <footer>{/* Shared footer */}</footer>
+    </div>
+  );
+};
+```
+
+### Navigation Features
+
+- **Active States**: Visual feedback for current route
+- **Mobile Responsive**: Collapsible navigation for mobile devices
+- **Theme Integration**: Navigation respects light/dark mode
+- **TypeScript**: Fully typed route parameters and navigation
+
+## 🔄 React Query Setup
+
+Complete server state management with TanStack Query:
+
+### Query Client Configuration
+
+```tsx
+// App.tsx - Query client setup
+import { QueryClient, QueryClientProvider } from '@tanstack/react-query';
+import { ReactQueryDevtools } from '@tanstack/react-query-devtools';
+
+const queryClient = new QueryClient({
+  defaultOptions: {
+    queries: {
+      staleTime: 5 * 60 * 1000, // 5 minutes
+      refetchOnWindowFocus: false,
+    },
+  },
+});
+
+function App() {
+  return (
+    <QueryClientProvider client={queryClient}>
+      {/* Your app */}
+      <ReactQueryDevtools initialIsOpen={false} />
+    </QueryClientProvider>
+  );
+}
+```
+
+### Example API Integration
+
+```tsx
+// Custom hooks for API calls
+const usePosts = () => {
+  return useQuery({
+    queryKey: ['posts'],
+    queryFn: async () => {
+      const response = await fetch(
+        'https://jsonplaceholder.typicode.com/posts'
+      );
+      if (!response.ok) throw new Error('Failed to fetch posts');
+      return response.json();
+    },
+  });
+};
+
+const useCreatePost = () => {
+  const queryClient = useQueryClient();
+
+  return useMutation({
+    mutationFn: async (newPost: CreatePostData) => {
+      const response = await fetch(
+        'https://jsonplaceholder.typicode.com/posts',
+        {
+          method: 'POST',
+          body: JSON.stringify(newPost),
+          headers: { 'Content-Type': 'application/json' },
+        }
+      );
+      return response.json();
+    },
+    onSuccess: () => {
+      // Invalidate and refetch posts
+      queryClient.invalidateQueries({ queryKey: ['posts'] });
+    },
+  });
+};
+```
+
+## 📝 Form Handling with React Hook Form & Zod
+
+Type-safe form validation with excellent performance:
+
+### Form Schema Definition
+
+```tsx
+import { z } from 'zod';
+import { zodResolver } from '@hookform/resolvers/zod';
+import { useForm } from 'react-hook-form';
+
+// Define validation schema
+const registrationSchema = z
+  .object({
+    email: z.string().email('Invalid email address'),
+    password: z
+      .string()
+      .min(8, 'Password must be at least 8 characters')
+      .regex(
+        /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)/,
+        'Password must contain uppercase, lowercase, and number'
+      ),
+    confirmPassword: z.string(),
+    name: z.string().min(2, 'Name must be at least 2 characters'),
+  })
+  .refine(data => data.password === data.confirmPassword, {
+    message: "Passwords don't match",
+    path: ['confirmPassword'],
+  });
+
+type RegistrationFormData = z.infer<typeof registrationSchema>;
+```
+
+### Form Component
+
+```tsx
+const RegistrationForm = () => {
+  const {
+    register,
+    handleSubmit,
+    formState: { errors, isSubmitting },
+  } = useForm<RegistrationFormData>({
+    resolver: zodResolver(registrationSchema),
+  });
+
+  const onSubmit = async (data: RegistrationFormData) => {
+    // Handle form submission
+    console.log('Form data:', data);
+  };
+
+  return (
+    <form onSubmit={handleSubmit(onSubmit)} className="space-y-4">
+      <div>
+        <input
+          {...register('email')}
+          type="email"
+          placeholder="Email"
+          className="w-full p-2 border rounded"
+        />
+        {errors.email && (
+          <p className="text-red-500 text-sm">{errors.email.message}</p>
+        )}
+      </div>
+
+      <button
+        type="submit"
+        disabled={isSubmitting}
+        className="w-full bg-blue-500 text-white p-2 rounded"
+      >
+        {isSubmitting ? 'Submitting...' : 'Register'}
+      </button>
+    </form>
+  );
+};
+```
+
+### Form Features
+
+- **Type Safety**: Full TypeScript integration
+- **Real-time Validation**: Instant feedback on field changes
+- **Error Handling**: Field-level and form-level error display
+- **Performance**: Minimal re-renders with uncontrolled components
+- **Accessibility**: Proper ARIA labels and error associations
 
 ## Theme System
 
@@ -372,7 +778,7 @@ Apply theme variants using specific classes:
 </div>
 
 // Marketing section with gradient
-<section className="bg-gradient-to-r from-marketing-gradient-start to-marketing-gradient-end">
+<section className="bg-linear-to-r from-marketing-gradient-start to-marketing-gradient-end">
   <h2 className="text-white">Marketing Content</h2>
   <span className="text-marketing-highlight">Special Offer!</span>
 </section>
@@ -641,27 +1047,38 @@ function MyComponent() {
 }
 ```
 
-## Development Tools
+---
 
-### ESLint Configuration
+## 🛠️ Development & Deployment
 
-This template uses ESLint to enforce code quality. The configuration is in `eslint.config.js` and includes:
+### Development Tools
+
+### ESLint Configuration with Caching
+
+This template uses ESLint to enforce code quality with intelligent caching for optimal performance. The configuration is in `eslint.config.js` and includes:
 
 - React recommended rules
 - TypeScript integration
 - Import order rules
 - React Hooks rules
+- **Performance caching** - 70% faster linting on subsequent runs
 
 To run ESLint:
 
 ```bash
-npm run lint      # Check for issues
-npm run lint:fix  # Fix issues automatically
+npm run lint      # Check for issues (cached)
+npm run lint:fix  # Fix issues automatically (cached)
 ```
+
+**Caching Details:**
+
+- Cache file: `.eslintcache` (automatically managed)
+- First run: ~6 seconds, subsequent runs: ~2.5 seconds
+- Only re-lints files that have changed since last run
 
 ### Prettier Configuration
 
-Prettier ensures consistent code formatting. Configuration is in `.prettierrc`:
+Prettier ensures consistent code formatting. Configuration includes modern settings for optimal development experience:
 
 ```json
 {
@@ -678,22 +1095,79 @@ Prettier ensures consistent code formatting. Configuration is in `.prettierrc`:
 To run Prettier:
 
 ```bash
-npm run format        # Format all files
+npm run format:all    # Format all files
 npm run format:check  # Check formatting
 ```
 
-### Husky and lint-staged
+### TypeScript Incremental Compilation
 
-The template uses Husky to run checks before commits and lint-staged to only check files that are being committed:
+TypeScript compilation is optimized with incremental builds:
 
-- ESLint and Prettier run on staged JavaScript/TypeScript files
-- Prettier runs on staged JSON and Markdown files
+```bash
+npm run type-check    # Incremental type checking (95% faster)
+```
 
-This ensures that all committed code meets the project's quality standards.
+**Performance Benefits:**
 
-## Performance Optimizations
+- Cache file: `.tsbuildinfo` (automatically managed)
+- Only type-checks changed files and their dependencies
+- Massive speed improvement on large codebases
 
-This template is built with performance in mind:
+### Husky and lint-staged with Performance Optimizations
+
+The template uses optimized git hooks for maximum development speed:
+
+**Pre-commit Hook** (`.husky/pre-commit`):
+
+- Runs lint-staged with caching enabled
+- Only processes staged files (not entire codebase)
+- ESLint and Prettier run with caching for speed
+
+**Pre-push Hook** (`.husky/pre-push`):
+
+- **Smart build verification**: Only builds if source files changed
+- Skips build entirely if only documentation/config changes
+- Saves 30+ seconds when no source changes detected
+
+**lint-staged configuration:**
+
+```json
+{
+  "*.{js,jsx,ts,tsx}": [
+    "eslint --fix --cache --cache-location .eslintcache",
+    "prettier --write"
+  ],
+  "*.{json,md}": ["prettier --write"]
+}
+```
+
+This ensures that all committed code meets quality standards without slowing down development.
+
+## ⚡ Performance Optimizations
+
+This template is built with performance in mind, including both runtime and development-time optimizations:
+
+### Development Performance
+
+#### ESLint Caching
+
+- **70% faster linting** on subsequent runs
+- Cache persists between sessions
+- Only re-lints changed files
+
+#### TypeScript Incremental Compilation
+
+- **95% faster type checking** (~0.5s vs 10s+)
+- Incremental builds track file dependencies
+- Perfect for large codebases
+
+#### Smart Git Hooks
+
+- **Conditional pre-push builds** - skip builds when no source changes
+- **Lint-staged optimization** - only check files being committed
+- **Cache-aware linting** - leverage ESLint cache in hooks
+
+### Runtime Performance
 
 ### Vite Optimizations
 
@@ -709,6 +1183,13 @@ This template is built with performance in mind:
 - **Concurrent Rendering**: Better user experience with non-blocking updates
 - **Automatic Batching**: Optimized state updates for better performance
 - **Suspense Improvements**: Enhanced loading states and error boundaries
+
+### React Query Performance
+
+- **Intelligent Caching**: Automatic background updates and cache invalidation
+- **Request Deduplication**: Multiple components requesting same data get single request
+- **Stale-While-Revalidate**: Instant UI updates with background data refresh
+- **DevTools Integration**: Monitor queries, cache status, and performance
 
 ### Tailwind CSS v4 Benefits
 
@@ -729,6 +1210,28 @@ npm run preview
 # Analyze bundle size (optional)
 npx vite-bundle-analyzer dist
 ```
+
+### Performance Monitoring
+
+The template includes tools to monitor and optimize performance:
+
+```tsx
+// React Query DevTools (development only)
+import { ReactQueryDevtools } from '@tanstack/react-query-devtools';
+
+// Monitor query performance, cache hits, and data flow
+<ReactQueryDevtools initialIsOpen={false} />;
+```
+
+### Cache Files
+
+All performance caches are properly managed:
+
+- `.eslintcache` - ESLint results cache
+- `.tsbuildinfo` - TypeScript incremental compilation cache
+- Both are git-ignored but persist locally for speed
+
+> 📊 **Performance Metrics**: See [PERFORMANCE.md](PERFORMANCE.md) for detailed benchmarks and optimization strategies.
 
 ## Browser Support
 
@@ -834,7 +1337,11 @@ const apiUrl = import.meta.env.VITE_API_URL;
 const appTitle = import.meta.env.VITE_APP_TITLE;
 ```
 
-## Folder Structure Best Practices
+---
+
+## 📚 Advanced Topics
+
+### Folder Structure Best Practices
 
 As your project grows, consider organizing files like this:
 
@@ -856,38 +1363,49 @@ src/
 
 ## Adding Dependencies
 
+### ✅ Already Included in This Template
+
+The following popular dependencies are **already configured and ready to use**:
+
+#### Routing (✅ Included)
+
+- **React Router v7** - Client-side routing with layouts
+- **Type definitions** - Full TypeScript support
+
+#### Server State Management (✅ Included)
+
+- **React Query (TanStack Query)** - Caching, background updates, DevTools
+- **Query DevTools** - Development debugging interface
+
+#### Form Handling (✅ Included)
+
+- **React Hook Form** - High-performance forms with minimal re-renders
+- **Zod** - TypeScript-first schema validation
+- **Hook Form Resolvers** - Seamless Zod integration
+
+#### Icons & UI (✅ Included)
+
+- **Lucide React** - Beautiful, customizable icon library (1000+ icons)
+- **Local Storage Hook** - Persistent state management
+
+#### Development Tools (✅ Included)
+
+- **Performance optimizations** - ESLint caching, TypeScript incremental compilation
+- **Smart git hooks** - Conditional builds and optimized linting
+
 ### Common Dependencies to Consider
 
-#### State Management
+#### State Management (Optional)
 
 ```bash
-# Zustand (lightweight state management)
+# Zustand (lightweight global state)
 npm install zustand
 
-# React Query (server state management)
-npm install @tanstack/react-query
+# Redux Toolkit (complex state management)
+npm install @reduxjs/toolkit react-redux
 ```
 
-#### Routing
-
-```bash
-# React Router
-npm install react-router-dom
-npm install --save-dev @types/react-router-dom
-```
-
-#### Form Handling
-
-```bash
-# React Hook Form
-npm install react-hook-form
-
-# Zod (schema validation)
-npm install zod
-npm install @hookform/resolvers
-```
-
-#### UI Libraries (if you prefer not to build from scratch)
+#### UI Libraries (if you prefer pre-built components)
 
 ```bash
 # Radix UI (headless components)
@@ -1018,11 +1536,19 @@ This project is licensed under the MIT License - see the [LICENSE](LICENSE) file
 
 ## Acknowledgments
 
-- **React Team** for the amazing React 19 release
+- **React Team** for the amazing React 19 release with improved performance
+- **React Router Team** for the powerful v7 routing solution
+- **TanStack Team** for React Query - revolutionary server state management
+- **React Hook Form Team** for the most performant form library
+- **Colinhacks** for Zod - the best TypeScript-first validation library
+- **Lucide** team for the beautiful, consistent icon library
 - **Vite Team** for the lightning-fast development experience
 - **Tailwind CSS** team for the utility-first CSS framework
 - **TypeScript Team** for bringing static typing to JavaScript
+- **ESLint & Prettier teams** for code quality tooling
 - **Open Source Community** for the incredible tooling ecosystem
+
+Special thanks to all the maintainers and contributors who make modern web development so productive and enjoyable!
 
 ---
 

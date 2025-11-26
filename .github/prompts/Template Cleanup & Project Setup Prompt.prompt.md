@@ -20,9 +20,10 @@ Author information (name, email, GitHub username)
 
 Homepage Content Cleanup:
 
-Remove template-specific components and content from HomePage.tsx
+Remove template-specific components and content from HomePage.tsx and Layout.tsx
 Replace with a clean, minimal starter homepage that welcomes users to their new project
 Keep the theme toggle and basic layout structure
+
 Documentation Updates:
 
 Update README.md with project-specific information

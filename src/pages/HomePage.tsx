@@ -5,8 +5,8 @@ const HomePage = () => {
   return (
     <>
       {/* Hero Section */}
-      <section className="relative overflow-hidden bg-linear-to-br from-l-bg-1 via-l-bg-2 to-l-bg-3 dark:from-d-bg-1 dark:via-d-bg-2 dark:to-d-bg-3">
-        <div className="container mx-auto px-4 md:px-8">
+      <section className="relative w-full overflow-hidden bg-linear-to-br from-l-bg-1 via-l-bg-2 to-l-bg-3 dark:from-d-bg-1 dark:via-d-bg-2 dark:to-d-bg-3">
+        <div className="w-full max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="py-16 md:py-24 text-center">
             <h1 className="text-4xl md:text-6xl font-bold mb-6 bg-linear-to-r from-accent-1 to-accent-2 bg-clip-text text-transparent">
               Modern React Template
@@ -55,8 +55,8 @@ const HomePage = () => {
 
       <main>
         {/* Features Section */}
-        <section className="py-20 bg-l-bg-1 dark:bg-d-bg-1">
-          <div className="container mx-auto px-4 md:px-8">
+        <section className="w-full py-20 bg-l-bg-1 dark:bg-d-bg-1">
+          <div className="w-full max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
             <div className="text-center mb-16">
               <h2 className="text-3xl md:text-4xl font-bold mb-4 text-l-text-1 dark:text-d-text-1">
                 Everything You Need
@@ -139,8 +139,8 @@ const HomePage = () => {
         </section>
 
         {/* New routing section */}
-        <section className="py-20 bg-l-bg-2 dark:bg-d-bg-2">
-          <div className="container mx-auto px-4 md:px-8">
+        <section className="w-full py-20 bg-l-bg-2 dark:bg-d-bg-2">
+          <div className="w-full max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
             <div className="text-center mb-16">
               <h2 className="text-3xl md:text-4xl font-bold mb-4 text-l-text-1 dark:text-d-text-1">
                 Explore New Features
@@ -174,8 +174,8 @@ const HomePage = () => {
         </section>
 
         {/* Theme Showcase */}
-        <section className="py-20 bg-l-bg-1 dark:bg-d-bg-1">
-          <div className="container mx-auto px-4 md:px-8">
+        <section className="w-full py-20 bg-l-bg-1 dark:bg-d-bg-1">
+          <div className="w-full max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
             <div className="text-center mb-16">
               <h2 className="text-3xl md:text-4xl font-bold mb-4 text-l-text-1 dark:text-d-text-1">
                 Powerful Theme System
@@ -280,7 +280,7 @@ const HomePage = () => {
 <p className="text-l-text-2 dark:text-d-text-2">
 <span className="text-l-text-3 dark:text-d-text-3">
 
-// Accent colors (mode independent)
+// Accent colors
 <button className="bg-accent-1">Primary</button>
 <span className="text-accent-success">Success</span>`}
                   />
@@ -325,8 +325,11 @@ const HomePage = () => {
         </section>
 
         {/* Getting Started */}
-        <section id="quick-start" className="py-20 bg-l-bg-2 dark:bg-d-bg-2">
-          <div className="container mx-auto px-4 md:px-8">
+        <section
+          id="quick-start"
+          className="w-full py-20 bg-l-bg-2 dark:bg-d-bg-2"
+        >
+          <div className="w-full max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
             <div className="text-center mb-16">
               <h2 className="text-3xl md:text-4xl font-bold mb-4 text-l-text-1 dark:text-d-text-1">
                 Quick Start Guide
@@ -413,8 +416,8 @@ const HomePage = () => {
         </section>
 
         {/* Performance & Browser Support */}
-        <section className="py-20 bg-l-bg-1 dark:bg-d-bg-1">
-          <div className="container mx-auto px-4 md:px-8">
+        <section className="w-full py-20 bg-l-bg-1 dark:bg-d-bg-1">
+          <div className="w-full max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
             <div className="grid grid-cols-1 lg:grid-cols-2 gap-12">
               <div>
                 <h2 className="text-3xl font-bold mb-6 text-l-text-1 dark:text-d-text-1">
@@ -598,8 +601,10 @@ function CodeBlock({ title, code }: CodeBlockProps) {
           {title}
         </h4>
       </div>
-      <pre className="p-4 overflow-x-auto">
-        <code className="text-sm text-l-text-1 dark:text-d-text-1">{code}</code>
+      <pre className="p-4 overflow-x-auto max-w-full">
+        <code className="text-sm text-l-text-1 dark:text-d-text-1 whitespace-pre-wrap wrap-break-words">
+          {code}
+        </code>
       </pre>
     </div>
   );

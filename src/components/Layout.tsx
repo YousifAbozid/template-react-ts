@@ -13,13 +13,13 @@ const Layout = () => {
   ];
 
   return (
-    <div className="min-h-screen bg-l-bg-1 dark:bg-d-bg-1 text-l-text-1 dark:text-d-text-1">
+    <div className="min-h-screen bg-l-bg-1 dark:bg-d-bg-1 text-l-text-1 dark:text-d-text-1 overflow-x-hidden">
       {/* Navigation */}
       <nav className="bg-l-bg-2 dark:bg-d-bg-2 border-b border-border-l dark:border-border-d">
-        <div className="container mx-auto px-4 md:px-8">
+        <div className="w-full max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="flex justify-between items-center py-4">
             {/* Logo */}
-            <Link to="/" className="text-xl font-bold text-accent-1">
+            <Link to="/" className="text-xl font-bold text-accent-1 shrink-0">
               React Template
             </Link>
 
@@ -47,12 +47,14 @@ const Layout = () => {
             </div>
 
             {/* Theme Toggle */}
-            <ThemeToggle />
+            <div className="shrink-0">
+              <ThemeToggle />
+            </div>
           </div>
 
           {/* Mobile Navigation */}
           <div className="md:hidden pb-4">
-            <div className="flex flex-wrap gap-2">
+            <div className="flex flex-wrap gap-2 -mx-1">
               {navigation.map(item => {
                 const Icon = item.icon;
                 const isActive = location.pathname === item.href;
@@ -78,13 +80,13 @@ const Layout = () => {
       </nav>
 
       {/* Main Content */}
-      <main>
+      <main className="w-full overflow-x-hidden">
         <Outlet />
       </main>
 
       {/* Footer */}
-      <footer className="py-12 bg-l-bg-3 dark:bg-d-bg-3 border-t border-border-l dark:border-border-d">
-        <div className="container mx-auto px-4 md:px-8">
+      <footer className="w-full py-12 bg-l-bg-3 dark:bg-d-bg-3 border-t border-border-l dark:border-border-d">
+        <div className="w-full max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="text-center">
             <div className="mb-6">
               <h3 className="text-2xl font-bold mb-2 text-l-text-1 dark:text-d-text-1">
@@ -108,7 +110,7 @@ const Layout = () => {
             </div>
 
             <div className="text-l-text-3 dark:text-d-text-3">
-              <p>
+              <p className="text-center wrap-break-word">
                 React 19 + TypeScript + Vite + Tailwind CSS v4 + React Router +
                 React Query
               </p>

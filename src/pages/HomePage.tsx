@@ -1,5 +1,18 @@
-import { Link } from 'react-router-dom';
-import { ArrowRight } from 'lucide-react';
+import {
+  Check,
+  Mail,
+  Lock,
+  User,
+  Phone,
+  RefreshCw,
+  Loader2,
+  AlertCircle,
+} from 'lucide-react';
+import { useForm } from 'react-hook-form';
+import { zodResolver } from '@hookform/resolvers/zod';
+import { z } from 'zod';
+import { useQuery, useMutation, useQueryClient } from '@tanstack/react-query';
+import { useState } from 'react';
 
 const HomePage = () => {
   return (
@@ -138,37 +151,148 @@ const HomePage = () => {
           </div>
         </section>
 
-        {/* New routing section */}
+        {/* Detailed Features Section */}
         <section className="w-full py-20 bg-l-bg-2 dark:bg-d-bg-2">
           <div className="w-full max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
             <div className="text-center mb-16">
               <h2 className="text-3xl md:text-4xl font-bold mb-4 text-l-text-1 dark:text-d-text-1">
-                Explore New Features
+                Complete Feature Set
               </h2>
               <p className="text-lg text-l-text-2 dark:text-d-text-2 max-w-2xl mx-auto">
-                Check out the new pages with routing, forms, and API integration
+                Everything you need for modern React development in one template
               </p>
             </div>
 
-            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
-              <NavigationCard
-                to="/features"
-                icon="🎨"
-                title="Features"
-                description="Explore all the built-in features, components, and utilities"
+            <div className="grid grid-cols-1 lg:grid-cols-2 gap-12">
+              {/* Core Technologies */}
+              <DetailedFeatureSection
+                title="Core Technologies"
+                description="Modern stack with the latest versions"
+                features={[
+                  'React 19 with latest features',
+                  'TypeScript for type safety',
+                  'Vite for fast development',
+                  'Tailwind CSS v4 with new features',
+                ]}
               />
-              <NavigationCard
-                to="/form-demo"
-                icon="📝"
-                title="Form Demo"
-                description="See React Hook Form + Zod validation in action"
+
+              {/* Routing & Navigation */}
+              <DetailedFeatureSection
+                title="Routing & Navigation"
+                description="Client-side routing with React Router"
+                features={[
+                  'React Router v6 setup',
+                  'Nested routing support',
+                  'Route-based code splitting',
+                  'Navigation guards',
+                ]}
               />
-              <NavigationCard
-                to="/api-demo"
-                icon="🔄"
-                title="API Demo"
-                description="React Query integration with data fetching examples"
+
+              {/* State Management */}
+              <DetailedFeatureSection
+                title="State Management"
+                description="Efficient data fetching and caching"
+                features={[
+                  'React Query for server state',
+                  'Local storage hook',
+                  'Optimistic updates',
+                  'Background refetching',
+                ]}
               />
+
+              {/* Forms & Validation */}
+              <DetailedFeatureSection
+                title="Forms & Validation"
+                description="Type-safe form handling"
+                features={[
+                  'React Hook Form integration',
+                  'Zod schema validation',
+                  'Form error handling',
+                  'Custom form components',
+                ]}
+              />
+
+              {/* UI & Theming */}
+              <DetailedFeatureSection
+                title="UI & Theming"
+                description="Comprehensive design system"
+                features={[
+                  'Dark/light mode support',
+                  'Semantic color variables',
+                  'Responsive design',
+                  'Accessible components',
+                ]}
+              />
+
+              {/* Developer Experience */}
+              <DetailedFeatureSection
+                title="Developer Experience"
+                description="Tools for productive development"
+                features={[
+                  'ESLint & Prettier setup',
+                  'Husky git hooks',
+                  'TypeScript strict mode',
+                  'Hot module replacement',
+                ]}
+              />
+            </div>
+
+            {/* Code Examples */}
+            <div className="mt-16">
+              <h3 className="text-3xl font-bold mb-8 text-l-text-1 dark:text-d-text-1 text-center">
+                Code Examples
+              </h3>
+
+              <div className="grid grid-cols-1 lg:grid-cols-2 gap-8">
+                <CodeExample
+                  title="Routing Setup"
+                  code={`// App.tsx
+import { BrowserRouter, Routes, Route } from 'react-router-dom';
+import Layout from './components/Layout';
+import HomePage from './pages/HomePage';
+
+function App() {
+  return (
+    <BrowserRouter>
+      <Routes>
+        <Route path="/" element={<Layout />}>
+          <Route index element={<HomePage />} />
+        </Route>
+      </Routes>
+    </BrowserRouter>
+  );
+}`}
+                />
+
+                <CodeExample
+                  title="Form with Validation"
+                  code={`// Form with Zod validation
+import { useForm } from 'react-hook-form';
+import { zodResolver } from '@hookform/resolvers/zod';
+import { z } from 'zod';
+
+const schema = z.object({
+  email: z.string().email('Invalid email'),
+  password: z.string().min(8, 'Min 8 characters')
+});
+
+type FormData = z.infer<typeof schema>;
+
+export function LoginForm() {
+  const { register, handleSubmit, formState: { errors } } = useForm<FormData>({
+    resolver: zodResolver(schema)
+  });
+
+  const onSubmit = (data: FormData) => console.log(data);
+
+  return (
+    <form onSubmit={handleSubmit(onSubmit)}>
+      {/* Form fields */}
+    </form>
+  );
+}`}
+                />
+              </div>
             </div>
           </div>
         </section>
@@ -415,6 +539,122 @@ const HomePage = () => {
           </div>
         </section>
 
+        {/* Form Demo Section */}
+        <section className="w-full py-20 bg-l-bg-2 dark:bg-d-bg-2">
+          <div className="w-full max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div className="text-center mb-16">
+              <h2 className="text-3xl md:text-4xl font-bold mb-4 text-l-text-1 dark:text-d-text-1">
+                Form Validation Demo
+              </h2>
+              <p className="text-lg text-l-text-2 dark:text-d-text-2 max-w-2xl mx-auto">
+                React Hook Form + Zod validation examples with real-time
+                feedback
+              </p>
+            </div>
+
+            <div className="grid grid-cols-1 lg:grid-cols-2 gap-12">
+              {/* Login Form */}
+              <div className="bg-l-bg-1 dark:bg-d-bg-1 p-8 rounded-xl border border-border-l dark:border-border-d">
+                <h3 className="text-2xl font-bold mb-6 text-l-text-1 dark:text-d-text-1">
+                  Login Form
+                </h3>
+                <LoginFormDemo />
+              </div>
+
+              {/* Register Form */}
+              <div className="bg-l-bg-1 dark:bg-d-bg-1 p-8 rounded-xl border border-border-l dark:border-border-d">
+                <h3 className="text-2xl font-bold mb-6 text-l-text-1 dark:text-d-text-1">
+                  Registration Form
+                </h3>
+                <RegisterFormDemo />
+              </div>
+            </div>
+
+            {/* Form Features */}
+            <div className="mt-16">
+              <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
+                <FormFeatureCard
+                  icon="✅"
+                  title="Type-Safe Validation"
+                  description="Zod schemas ensure runtime and compile-time type safety"
+                />
+                <FormFeatureCard
+                  icon="🎯"
+                  title="Real-time Feedback"
+                  description="Instant validation with helpful error messages"
+                />
+                <FormFeatureCard
+                  icon="🚀"
+                  title="Performance Optimized"
+                  description="React Hook Form minimizes re-renders for better performance"
+                />
+              </div>
+            </div>
+          </div>
+        </section>
+
+        {/* API Demo Section */}
+        <section className="w-full py-20 bg-l-bg-1 dark:bg-d-bg-1">
+          <div className="w-full max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div className="text-center mb-16">
+              <h2 className="text-3xl md:text-4xl font-bold mb-4 text-l-text-1 dark:text-d-text-1">
+                API Integration Demo
+              </h2>
+              <p className="text-lg text-l-text-2 dark:text-d-text-2 max-w-2xl mx-auto">
+                React Query data fetching with caching, background updates, and
+                error handling
+              </p>
+            </div>
+
+            <div className="grid grid-cols-1 lg:grid-cols-2 gap-12">
+              {/* Posts List */}
+              <div className="bg-l-bg-2 dark:bg-d-bg-2 p-8 rounded-xl border border-border-l dark:border-border-d">
+                <h3 className="text-2xl font-bold mb-6 text-l-text-1 dark:text-d-text-1">
+                  Posts (Query Demo)
+                </h3>
+                <PostsListDemo />
+              </div>
+
+              {/* User Details */}
+              <div className="bg-l-bg-2 dark:bg-d-bg-2 p-8 rounded-xl border border-border-l dark:border-border-d">
+                <h3 className="text-2xl font-bold mb-6 text-l-text-1 dark:text-d-text-1">
+                  User Details (Dynamic Query)
+                </h3>
+                <UserDetailsDemo />
+              </div>
+            </div>
+
+            {/* Create Post */}
+            <div className="mt-12 bg-l-bg-2 dark:bg-d-bg-2 p-8 rounded-xl border border-border-l dark:border-border-d">
+              <h3 className="text-2xl font-bold mb-6 text-l-text-1 dark:text-d-text-1">
+                Create Post (Mutation Demo)
+              </h3>
+              <CreatePostDemo />
+            </div>
+
+            {/* React Query Features */}
+            <div className="mt-16">
+              <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
+                <ApiFeatureCard
+                  icon="⚡️"
+                  title="Automatic Caching"
+                  description="Data is automatically cached and reused across components"
+                />
+                <ApiFeatureCard
+                  icon="🔄"
+                  title="Background Updates"
+                  description="Data is refetched in the background to stay fresh"
+                />
+                <ApiFeatureCard
+                  icon="📱"
+                  title="Offline Support"
+                  description="Graceful handling of network failures and offline scenarios"
+                />
+              </div>
+            </div>
+          </div>
+        </section>
+
         {/* Performance & Browser Support */}
         <section className="w-full py-20 bg-l-bg-1 dark:bg-d-bg-1">
           <div className="w-full max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
@@ -479,6 +719,74 @@ const HomePage = () => {
   );
 };
 
+// Types for API demo
+type Post = {
+  id: number;
+  title: string;
+  body: string;
+  userId: number;
+};
+
+type User = {
+  id: number;
+  name: string;
+  email: string;
+  phone: string;
+};
+
+// Form schemas
+const loginSchema = z.object({
+  email: z.string().email('Please enter a valid email address'),
+  password: z.string().min(8, 'Password must be at least 8 characters'),
+});
+
+const registerSchema = z
+  .object({
+    name: z.string().min(2, 'Name must be at least 2 characters'),
+    email: z.string().email('Please enter a valid email address'),
+    phone: z
+      .string()
+      .regex(/^\+?[1-9]\d{1,14}$/, 'Please enter a valid phone number'),
+    password: z.string().min(8, 'Password must be at least 8 characters'),
+    confirmPassword: z.string(),
+  })
+  .refine(data => data.password === data.confirmPassword, {
+    message: "Passwords don't match",
+    path: ['confirmPassword'],
+  });
+
+type LoginFormData = z.infer<typeof loginSchema>;
+type RegisterFormData = z.infer<typeof registerSchema>;
+
+// API functions
+const fetchPosts = async (): Promise<Post[]> => {
+  const response = await fetch(
+    'https://jsonplaceholder.typicode.com/posts?_limit=5'
+  );
+  if (!response.ok) throw new Error('Failed to fetch posts');
+  return response.json();
+};
+
+const fetchUser = async (id: number): Promise<User> => {
+  const response = await fetch(
+    `https://jsonplaceholder.typicode.com/users/${id}`
+  );
+  if (!response.ok) throw new Error('Failed to fetch user');
+  return response.json();
+};
+
+const createPost = async (post: Omit<Post, 'id'>): Promise<Post> => {
+  const response = await fetch('https://jsonplaceholder.typicode.com/posts', {
+    method: 'POST',
+    headers: {
+      'Content-Type': 'application/json',
+    },
+    body: JSON.stringify(post),
+  });
+  if (!response.ok) throw new Error('Failed to create post');
+  return response.json();
+};
+
 interface BadgeProps {
   text: string;
 }
@@ -491,32 +799,529 @@ function Badge({ text }: BadgeProps) {
   );
 }
 
-interface NavigationCardProps {
-  to: string;
+interface CodeExampleProps {
+  title: string;
+  code: string;
+}
+
+function CodeExample({ title, code }: CodeExampleProps) {
+  return (
+    <div className="bg-l-bg-1 dark:bg-d-bg-1 rounded-xl border border-border-l dark:border-border-d overflow-hidden">
+      <div className="bg-l-bg-2 dark:bg-d-bg-2 px-4 py-3 border-b border-border-l dark:border-border-d">
+        <h4 className="font-semibold text-l-text-1 dark:text-d-text-1">
+          {title}
+        </h4>
+      </div>
+      <pre className="p-4 overflow-x-auto text-sm">
+        <code className="text-l-text-1 dark:text-d-text-1">{code}</code>
+      </pre>
+    </div>
+  );
+}
+
+interface DetailedFeatureSectionProps {
+  title: string;
+  description: string;
+  features: string[];
+}
+
+function DetailedFeatureSection({
+  title,
+  description,
+  features,
+}: DetailedFeatureSectionProps) {
+  return (
+    <div className="bg-l-bg-1 dark:bg-d-bg-1 p-8 rounded-xl border border-border-l dark:border-border-d">
+      <h3 className="text-2xl font-bold mb-3 text-l-text-1 dark:text-d-text-1">
+        {title}
+      </h3>
+      <p className="text-l-text-2 dark:text-d-text-2 mb-6">{description}</p>
+      <ul className="space-y-3">
+        {features.map((feature, index) => (
+          <li key={index} className="flex items-center gap-3">
+            <Check size={20} className="text-accent-success shrink-0" />
+            <span className="text-l-text-1 dark:text-d-text-1">{feature}</span>
+          </li>
+        ))}
+      </ul>
+    </div>
+  );
+}
+
+// Form Demo Components
+function LoginFormDemo() {
+  const {
+    register,
+    handleSubmit,
+    formState: { errors, isSubmitting },
+  } = useForm<LoginFormData>({
+    resolver: zodResolver(loginSchema),
+  });
+
+  const onSubmit = async (data: LoginFormData) => {
+    await new Promise(resolve => setTimeout(resolve, 1000));
+    console.log('Login data:', data);
+    alert('Login form submitted! Check console for data.');
+  };
+
+  return (
+    <form onSubmit={handleSubmit(onSubmit)} className="space-y-6">
+      <FormField
+        label="Email"
+        icon={<Mail size={20} />}
+        error={errors.email?.message}
+      >
+        <input
+          type="email"
+          placeholder="Enter your email"
+          className={`w-full bg-l-bg-2 dark:bg-d-bg-2 text-l-text-1 dark:text-d-text-1 border border-border-l dark:border-border-d rounded-lg px-4 py-3 pl-12 focus:border-accent-1 transition-colors outline-none placeholder:text-l-text-3 dark:placeholder:text-d-text-3 ${
+            errors.email
+              ? 'border-accent-danger focus:border-accent-danger'
+              : ''
+          }`}
+          {...register('email')}
+        />
+      </FormField>
+
+      <FormField
+        label="Password"
+        icon={<Lock size={20} />}
+        error={errors.password?.message}
+      >
+        <input
+          type="password"
+          placeholder="Enter your password"
+          className={`w-full bg-l-bg-2 dark:bg-d-bg-2 text-l-text-1 dark:text-d-text-1 border border-border-l dark:border-border-d rounded-lg px-4 py-3 pl-12 focus:border-accent-1 transition-colors outline-none placeholder:text-l-text-3 dark:placeholder:text-d-text-3 ${
+            errors.password
+              ? 'border-accent-danger focus:border-accent-danger'
+              : ''
+          }`}
+          {...register('password')}
+        />
+      </FormField>
+
+      <button
+        type="submit"
+        disabled={isSubmitting}
+        className={`w-full bg-accent-1 hover:bg-accent-2 text-white py-3 rounded-lg font-semibold transition-all duration-300 transform hover:scale-105 ${
+          isSubmitting ? 'opacity-50 cursor-not-allowed transform-none' : ''
+        }`}
+      >
+        {isSubmitting ? 'Logging in...' : 'Log In'}
+      </button>
+    </form>
+  );
+}
+
+function RegisterFormDemo() {
+  const {
+    register,
+    handleSubmit,
+    formState: { errors, isSubmitting },
+  } = useForm<RegisterFormData>({
+    resolver: zodResolver(registerSchema),
+  });
+
+  const onSubmit = async (data: RegisterFormData) => {
+    await new Promise(resolve => setTimeout(resolve, 1500));
+    console.log('Registration data:', data);
+    alert('Registration form submitted! Check console for data.');
+  };
+
+  return (
+    <form onSubmit={handleSubmit(onSubmit)} className="space-y-6">
+      <FormField
+        label="Full Name"
+        icon={<User size={20} />}
+        error={errors.name?.message}
+      >
+        <input
+          type="text"
+          placeholder="Enter your full name"
+          className={`w-full bg-l-bg-2 dark:bg-d-bg-2 text-l-text-1 dark:text-d-text-1 border border-border-l dark:border-border-d rounded-lg px-4 py-3 pl-12 focus:border-accent-1 transition-colors outline-none placeholder:text-l-text-3 dark:placeholder:text-d-text-3 ${
+            errors.name ? 'border-accent-danger focus:border-accent-danger' : ''
+          }`}
+          {...register('name')}
+        />
+      </FormField>
+
+      <FormField
+        label="Email"
+        icon={<Mail size={20} />}
+        error={errors.email?.message}
+      >
+        <input
+          type="email"
+          placeholder="Enter your email"
+          className={`w-full bg-l-bg-2 dark:bg-d-bg-2 text-l-text-1 dark:text-d-text-1 border border-border-l dark:border-border-d rounded-lg px-4 py-3 pl-12 focus:border-accent-1 transition-colors outline-none placeholder:text-l-text-3 dark:placeholder:text-d-text-3 ${
+            errors.email
+              ? 'border-accent-danger focus:border-accent-danger'
+              : ''
+          }`}
+          {...register('email')}
+        />
+      </FormField>
+
+      <FormField
+        label="Phone Number"
+        icon={<Phone size={20} />}
+        error={errors.phone?.message}
+      >
+        <input
+          type="tel"
+          placeholder="+1234567890"
+          className={`w-full bg-l-bg-2 dark:bg-d-bg-2 text-l-text-1 dark:text-d-text-1 border border-border-l dark:border-border-d rounded-lg px-4 py-3 pl-12 focus:border-accent-1 transition-colors outline-none placeholder:text-l-text-3 dark:placeholder:text-d-text-3 ${
+            errors.phone
+              ? 'border-accent-danger focus:border-accent-danger'
+              : ''
+          }`}
+          {...register('phone')}
+        />
+      </FormField>
+
+      <FormField
+        label="Password"
+        icon={<Lock size={20} />}
+        error={errors.password?.message}
+      >
+        <input
+          type="password"
+          placeholder="Create a password"
+          className={`w-full bg-l-bg-2 dark:bg-d-bg-2 text-l-text-1 dark:text-d-text-1 border border-border-l dark:border-border-d rounded-lg px-4 py-3 pl-12 focus:border-accent-1 transition-colors outline-none placeholder:text-l-text-3 dark:placeholder:text-d-text-3 ${
+            errors.password
+              ? 'border-accent-danger focus:border-accent-danger'
+              : ''
+          }`}
+          {...register('password')}
+        />
+      </FormField>
+
+      <FormField
+        label="Confirm Password"
+        icon={<Lock size={20} />}
+        error={errors.confirmPassword?.message}
+      >
+        <input
+          type="password"
+          placeholder="Confirm your password"
+          className={`w-full bg-l-bg-2 dark:bg-d-bg-2 text-l-text-1 dark:text-d-text-1 border border-border-l dark:border-border-d rounded-lg px-4 py-3 pl-12 focus:border-accent-1 transition-colors outline-none placeholder:text-l-text-3 dark:placeholder:text-d-text-3 ${
+            errors.confirmPassword
+              ? 'border-accent-danger focus:border-accent-danger'
+              : ''
+          }`}
+          {...register('confirmPassword')}
+        />
+      </FormField>
+
+      <button
+        type="submit"
+        disabled={isSubmitting}
+        className={`w-full bg-accent-1 hover:bg-accent-2 text-white py-3 rounded-lg font-semibold transition-all duration-300 transform hover:scale-105 ${
+          isSubmitting ? 'opacity-50 cursor-not-allowed transform-none' : ''
+        }`}
+      >
+        {isSubmitting ? 'Creating Account...' : 'Create Account'}
+      </button>
+    </form>
+  );
+}
+
+interface FormFieldProps {
+  label: string;
+  icon: React.ReactNode;
+  error?: string;
+  children: React.ReactNode;
+}
+
+function FormField({ label, icon, error, children }: FormFieldProps) {
+  return (
+    <div>
+      <label className="block text-sm font-medium text-l-text-1 dark:text-d-text-1 mb-2">
+        {label}
+      </label>
+      <div className="relative">
+        <div className="absolute left-3 top-1/2 transform -translate-y-1/2 text-l-text-3 dark:text-d-text-3">
+          {icon}
+        </div>
+        {children}
+      </div>
+      {error && <p className="mt-2 text-sm text-accent-danger">{error}</p>}
+    </div>
+  );
+}
+
+interface FormFeatureCardProps {
   icon: string;
   title: string;
   description: string;
 }
 
-function NavigationCard({ to, icon, title, description }: NavigationCardProps) {
+function FormFeatureCard({ icon, title, description }: FormFeatureCardProps) {
   return (
-    <Link
-      to={to}
-      className="block bg-l-bg-2 dark:bg-d-bg-2 p-6 rounded-xl border border-border-l dark:border-border-d hover:shadow-lg hover:scale-105 transition-all duration-300 group"
-    >
-      <div className="text-4xl mb-4">{icon}</div>
-      <h3 className="text-xl font-bold mb-3 text-l-text-1 dark:text-d-text-1 group-hover:text-accent-1 transition-colors">
+    <div className="bg-l-bg-1 dark:bg-d-bg-1 p-6 rounded-lg border border-border-l dark:border-border-d">
+      <div className="text-3xl mb-3">{icon}</div>
+      <h3 className="font-semibold text-l-text-1 dark:text-d-text-1 mb-2">
         {title}
       </h3>
-      <p className="text-l-text-2 dark:text-d-text-2 mb-4">{description}</p>
-      <span className="inline-flex items-center gap-2 text-accent-1 font-medium">
-        Learn more{' '}
-        <ArrowRight
-          size={16}
-          className="group-hover:translate-x-1 transition-transform"
+      <p className="text-sm text-l-text-2 dark:text-d-text-2">{description}</p>
+    </div>
+  );
+}
+
+// API Demo Components
+function PostsListDemo() {
+  const {
+    data: posts,
+    isLoading,
+    isError,
+    error,
+    refetch,
+    isFetching,
+  } = useQuery({
+    queryKey: ['posts'],
+    queryFn: fetchPosts,
+    staleTime: 5 * 60 * 1000, // 5 minutes
+  });
+
+  if (isLoading) {
+    return (
+      <div className="flex items-center justify-center py-12">
+        <Loader2 className="animate-spin text-accent-1" size={24} />
+        <span className="ml-2 text-l-text-2 dark:text-d-text-2">
+          Loading posts...
+        </span>
+      </div>
+    );
+  }
+
+  if (isError) {
+    return (
+      <div className="text-center py-12">
+        <AlertCircle className="mx-auto text-accent-danger mb-4" size={48} />
+        <p className="text-accent-danger mb-4">
+          Error:{' '}
+          {error instanceof Error ? error.message : 'Failed to fetch posts'}
+        </p>
+        <button
+          onClick={() => refetch()}
+          className="bg-accent-1 hover:bg-accent-2 text-white px-4 py-2 rounded-lg transition-colors"
+        >
+          Retry
+        </button>
+      </div>
+    );
+  }
+
+  return (
+    <div>
+      <div className="flex justify-between items-center mb-4">
+        <span className="text-sm text-l-text-3 dark:text-d-text-3">
+          {posts?.length} posts
+        </span>
+        <button
+          onClick={() => refetch()}
+          disabled={isFetching}
+          className="flex items-center gap-2 text-accent-1 hover:text-accent-2 transition-colors disabled:opacity-50"
+        >
+          <RefreshCw
+            className={`w-4 h-4 ${isFetching ? 'animate-spin' : ''}`}
+          />
+          Refresh
+        </button>
+      </div>
+
+      <div className="space-y-4">
+        {posts?.map(post => (
+          <div
+            key={post.id}
+            className="bg-l-bg-1 dark:bg-d-bg-1 p-4 rounded-lg border border-border-l dark:border-border-d"
+          >
+            <h4 className="font-semibold text-l-text-1 dark:text-d-text-1 mb-2">
+              {post.title}
+            </h4>
+            <p className="text-sm text-l-text-2 dark:text-d-text-2 line-clamp-2">
+              {post.body}
+            </p>
+          </div>
+        ))}
+      </div>
+    </div>
+  );
+}
+
+function UserDetailsDemo() {
+  const [userId, setUserId] = useState<number>(1);
+
+  const {
+    data: user,
+    isLoading,
+    isError,
+    error,
+  } = useQuery({
+    queryKey: ['user', userId],
+    queryFn: () => fetchUser(userId),
+    enabled: userId > 0,
+  });
+
+  return (
+    <div>
+      <div className="mb-6">
+        <label className="block text-sm font-medium text-l-text-1 dark:text-d-text-1 mb-2">
+          User ID
+        </label>
+        <select
+          value={userId}
+          onChange={e => setUserId(Number(e.target.value))}
+          className="w-full bg-l-bg-1 dark:bg-d-bg-1 text-l-text-1 dark:text-d-text-1 border border-border-l dark:border-border-d rounded-lg px-3 py-2 focus:border-accent-1 outline-none"
+        >
+          {Array.from({ length: 10 }, (_, i) => i + 1).map(id => (
+            <option key={id} value={id}>
+              User {id}
+            </option>
+          ))}
+        </select>
+      </div>
+
+      {isLoading && (
+        <div className="flex items-center justify-center py-8">
+          <Loader2 className="animate-spin text-accent-1" size={24} />
+          <span className="ml-2 text-l-text-2 dark:text-d-text-2">
+            Loading user...
+          </span>
+        </div>
+      )}
+
+      {isError && (
+        <div className="text-center py-8">
+          <AlertCircle className="mx-auto text-accent-danger mb-2" size={32} />
+          <p className="text-accent-danger text-sm">
+            {error instanceof Error ? error.message : 'Failed to fetch user'}
+          </p>
+        </div>
+      )}
+
+      {user && (
+        <div className="bg-l-bg-1 dark:bg-d-bg-1 p-4 rounded-lg border border-border-l dark:border-border-d">
+          <h4 className="font-semibold text-l-text-1 dark:text-d-text-1 mb-3">
+            {user.name}
+          </h4>
+          <div className="space-y-2 text-sm">
+            <p className="text-l-text-2 dark:text-d-text-2">
+              <strong>Email:</strong> {user.email}
+            </p>
+            <p className="text-l-text-2 dark:text-d-text-2">
+              <strong>Phone:</strong> {user.phone}
+            </p>
+          </div>
+        </div>
+      )}
+    </div>
+  );
+}
+
+function CreatePostDemo() {
+  const [title, setTitle] = useState('');
+  const [body, setBody] = useState('');
+  const queryClient = useQueryClient();
+
+  const createPostMutation = useMutation({
+    mutationFn: createPost,
+    onSuccess: newPost => {
+      // Optimistically update the posts list
+      queryClient.setQueryData(['posts'], (oldPosts: Post[] | undefined) => {
+        return oldPosts ? [newPost, ...oldPosts] : [newPost];
+      });
+
+      // Clear form
+      setTitle('');
+      setBody('');
+    },
+  });
+
+  const handleSubmit = (e: React.FormEvent) => {
+    e.preventDefault();
+    if (title.trim() && body.trim()) {
+      createPostMutation.mutate({
+        title: title.trim(),
+        body: body.trim(),
+        userId: 1,
+      });
+    }
+  };
+
+  return (
+    <form onSubmit={handleSubmit} className="space-y-4">
+      <div>
+        <label className="block text-sm font-medium text-l-text-1 dark:text-d-text-1 mb-2">
+          Title
+        </label>
+        <input
+          type="text"
+          value={title}
+          onChange={e => setTitle(e.target.value)}
+          className="w-full bg-l-bg-1 dark:bg-d-bg-1 text-l-text-1 dark:text-d-text-1 border border-border-l dark:border-border-d rounded-lg px-3 py-2 focus:border-accent-1 outline-none"
+          placeholder="Enter post title"
+          required
         />
-      </span>
-    </Link>
+      </div>
+
+      <div>
+        <label className="block text-sm font-medium text-l-text-1 dark:text-d-text-1 mb-2">
+          Body
+        </label>
+        <textarea
+          value={body}
+          onChange={e => setBody(e.target.value)}
+          className="w-full bg-l-bg-1 dark:bg-d-bg-1 text-l-text-1 dark:text-d-text-1 border border-border-l dark:border-border-d rounded-lg px-3 py-2 focus:border-accent-1 outline-none h-24 resize-none"
+          placeholder="Enter post content"
+          required
+        />
+      </div>
+
+      <button
+        type="submit"
+        disabled={createPostMutation.isPending || !title.trim() || !body.trim()}
+        className="bg-accent-1 hover:bg-accent-2 text-white px-6 py-2 rounded-lg font-medium transition-colors disabled:opacity-50 disabled:cursor-not-allowed flex items-center gap-2"
+      >
+        {createPostMutation.isPending && (
+          <Loader2 className="animate-spin" size={16} />
+        )}
+        {createPostMutation.isPending ? 'Creating...' : 'Create Post'}
+      </button>
+
+      {createPostMutation.isError && (
+        <p className="text-accent-danger text-sm">
+          Error:{' '}
+          {createPostMutation.error instanceof Error
+            ? createPostMutation.error.message
+            : 'Failed to create post'}
+        </p>
+      )}
+
+      {createPostMutation.isSuccess && (
+        <p className="text-accent-success text-sm">
+          Post created successfully! Check the posts list for updates.
+        </p>
+      )}
+    </form>
+  );
+}
+
+interface ApiFeatureCardProps {
+  icon: string;
+  title: string;
+  description: string;
+}
+
+function ApiFeatureCard({ icon, title, description }: ApiFeatureCardProps) {
+  return (
+    <div className="bg-l-bg-1 dark:bg-d-bg-1 p-6 rounded-lg border border-border-l dark:border-border-d">
+      <div className="text-3xl mb-3">{icon}</div>
+      <h3 className="font-semibold text-l-text-1 dark:text-d-text-1 mb-2">
+        {title}
+      </h3>
+      <p className="text-sm text-l-text-2 dark:text-d-text-2">{description}</p>
+    </div>
   );
 }
 

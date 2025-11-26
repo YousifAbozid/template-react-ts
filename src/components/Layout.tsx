@@ -1,6 +1,6 @@
 import { Outlet, Link, useLocation } from 'react-router-dom';
 import ThemeToggle from './ThemeToggle';
-import { Home, Star, FileText, Database, Zap } from 'lucide-react';
+import { Home, Star, FileText, Database } from 'lucide-react';
 
 const Layout = () => {
   const location = useLocation();
@@ -10,7 +10,6 @@ const Layout = () => {
     { name: 'Features', href: '/features', icon: Star },
     { name: 'Form Demo', href: '/form-demo', icon: FileText },
     { name: 'API Demo', href: '/api-demo', icon: Database },
-    { name: 'New Features', href: '/demo', icon: Zap },
   ];
 
   return (

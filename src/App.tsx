@@ -8,7 +8,6 @@ import HomePage from './pages/HomePage';
 import FeaturesPage from './pages/FeaturesPage';
 import FormDemoPage from './pages/FormDemoPage';
 import ApiDemoPage from './pages/ApiDemoPage';
-import DemoPage from './pages/DemoPage';
 import NotFoundPage from './pages/NotFoundPage';
 import { ErrorBoundary } from './components/ErrorBoundary';
 import { ToastProvider } from './contexts/ToastContext';
@@ -27,7 +26,6 @@ function App() {
                 <Route path="features" element={<FeaturesPage />} />
                 <Route path="form-demo" element={<FormDemoPage />} />
                 <Route path="api-demo" element={<ApiDemoPage />} />
-                <Route path="demo" element={<DemoPage />} />
               </Route>
               {/* 404 Page - catches all unmatched routes */}
               <Route path="*" element={<NotFoundPage />} />

@@ -12,6 +12,8 @@
     "dev": "vite",
     "preview": "vite preview",
     "build": "tsc -b && vite build",
+    "build:analyze": "cross-env ANALYZE=true npm run build && npx vite-bundle-analyzer dist",
+    "analyze": "npx vite-bundle-analyzer dist",
     "type-check": "tsc --noEmit --incremental --tsBuildInfoFile .tsbuildinfo",
     "lint": "eslint --ext .js,.jsx,.ts,.tsx src --cache --cache-location .eslintcache",
     "lint:fix": "eslint --ext .js,.jsx,.ts,.tsx src --fix --cache --cache-location .eslintcache",
@@ -48,6 +50,7 @@
     "@types/react-dom": "^19.2.3",
     "@types/react-router-dom": "^5.3.3",
     "@vitejs/plugin-react": "^5.1.1",
+    "cross-env": "^10.1.0",
     "eslint": "^9.39.1",
     "eslint-plugin-react": "^7.37.5",
     "eslint-plugin-react-hooks": "^7.0.1",
@@ -56,10 +59,12 @@
     "husky": "^9.1.7",
     "lint-staged": "^16.2.7",
     "prettier": "^3.6.2",
+    "rollup-plugin-visualizer": "^6.0.5",
     "terser": "^5.44.1",
     "typescript": "~5.9.3",
     "typescript-eslint": "^8.48.0",
-    "vite": "^7.2.4"
+    "vite": "^7.2.4",
+    "vite-bundle-analyzer": "^1.2.3"
   },
   "lint-staged": {
     "*.{js,jsx,ts,tsx}": [

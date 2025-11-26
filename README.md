@@ -1219,11 +1219,11 @@ This template is built with performance in mind, including both runtime and deve
 # Build for production with optimizations
 npm run build
 
+# Build with bundle size analysis
+npm run build:analyze
+
 # Preview production build locally
 npm run preview
-
-# Analyze bundle size (optional)
-npx vite-bundle-analyzer dist
 ```
 
 ### Performance Monitoring
@@ -1448,7 +1448,7 @@ npm install @react-spring/web
 
 1. **Keep dependencies updated**: Use `npm run upgrade` regularly
 2. **Audit security**: Run `npm audit` to check for vulnerabilities
-3. **Bundle analysis**: Monitor bundle size with tools like `webpack-bundle-analyzer`
+3. **Bundle analysis**: Monitor bundle size with Vite's built-in `--report` flag
 4. **Dependency cleanup**: Remove unused dependencies with `depcheck`
 
 ## Testing Setup

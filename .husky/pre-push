@@ -1,0 +1,21 @@
+#!/bin/sh
+echo "🚀 Running pre-push checks..."
+
+# Check if any source files changed since last push
+CHANGED_FILES=$(git diff --name-only @{push}..HEAD 2>/dev/null || git diff --name-only HEAD~1..HEAD)
+SOURCE_CHANGED=$(echo "$CHANGED_FILES" | grep -E '\.(ts|tsx|js|jsx|json)$' || true)
+
+if [ -z "$SOURCE_CHANGED" ]; then
+  echo "📦 No source files changed, skipping build check"
+  exit 0
+fi
+
+echo "📦 Source files changed, running build check..."
+npm run type-check && npm run build
+
+if [ $? -eq 0 ]; then
+  echo "✅ Build check passed!"
+else
+  echo "❌ Build check failed!"
+  exit 1
+fi

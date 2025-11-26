@@ -17,7 +17,7 @@
     "format": "prettier --write \"**/*.{js,jsx,ts,tsx,json,md}\"",
     "format:check": "prettier --check \"**/*.{js,jsx,ts,tsx,json,md}\"",
     "fix-all": "npm run lint:fix && npm run format",
-    "type-check": "tsc --noEmit --incremental",
+    "type-check": "tsc --noEmit --incremental --tsBuildInfoFile .tsbuildinfo",
     "upgrade": "npx npm-check-updates -u && npm install",
     "prepare": "husky"
   },
@@ -65,7 +65,7 @@
   },
   "lint-staged": {
     "*.{js,jsx,ts,tsx}": [
-      "eslint --fix",
+      "eslint --fix --cache --cache-location .eslintcache",
       "prettier --write"
     ],
     "*.{json,md}": [

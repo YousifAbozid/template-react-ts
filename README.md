@@ -12,7 +12,7 @@ A modern, production-ready template for building web applications with React 19,
 | [🏗️ Getting Started](#getting-started)                | Installation and setup           |
 | [📁 Project Structure](#-project-structure)           | File organization                |
 | [⚡ Scripts](#available-scripts)                      | Development commands             |
-| [🎯 App Features](#-application-features--demos)      | Live demos and examples          |
+| [🎯 App Features](#-application-features--demos)      | Comprehensive single page demos  |
 | [🧭 Routing](#-react-router-integration)              | React Router setup               |
 | [🔄 State Management](#-react-query-setup)            | React Query integration          |
 | [📝 Forms](#-form-handling-with-react-hook-form--zod) | Form validation with Zod         |
@@ -32,15 +32,16 @@ A modern, production-ready template for building web applications with React 19,
 
 [↑ Back to Table of Contents](#-table-of-contents)
 
-This template now includes a complete application structure with:
+This template features a comprehensive single-page application structure with:
 
-- 🧭 **Client-side routing** with React Router v7
-- 🔄 **Server state management** with React Query (TanStack Query)
-- 📝 **Form handling** with React Hook Form + Zod validation
-- 🎯 **Live demonstrations** of all features with interactive pages
-- ⚡ **Performance optimizations** with intelligent caching
-- 🎨 **Beautiful UI components** with Lucide React icons
-- 🚀 **Developer experience** enhanced with smart git hooks
+- 🏠 **Consolidated HomePage** - All features, forms, and demos in one comprehensive page
+- 🎯 **Complete Feature Showcase** - Theme system, form validation, and interactive examples
+- 📝 **Integrated Form Demos** - Login and registration forms with real-time validation
+- 🔄 **Enhanced Error Boundary** - Improved UI with better button alignment and styling
+- 🚀 **Advanced Pre-Push Hooks** - Auto-fix capabilities for ESLint and Prettier with change staging
+- ⚡ **Performance Optimizations** - Smart caching and conditional builds
+- 🛠️ **Streamlined Navigation** - Simplified single-page structure for focused development
+- 🎨 **Enhanced Developer Experience** - Automated code quality checks with auto-fixing
 
 ## Features
 
@@ -144,18 +145,25 @@ This template combines the following technologies to provide a modern developmen
 template-react-ts/
 ├── .husky/                # Git hooks configuration
 │   ├── pre-commit         # Lint staged files before commit
-│   └── pre-push           # Smart build verification before push
+│   └── pre-push           # Enhanced with auto-fix capabilities
 ├── src/
 │   ├── components/        # Reusable components
-│   │   ├── Layout.tsx     # Main layout with navigation
-│   │   └── ThemeToggle.tsx # Dark mode toggle component
+│   │   ├── Layout.tsx     # Simplified navigation layout
+│   │   ├── ThemeToggle.tsx # Dark mode toggle component
+│   │   ├── ErrorBoundary.tsx # Enhanced error handling UI
+│   │   ├── Toast.tsx      # Toast notification component
+│   │   └── ToastContainer.tsx # Toast container
+│   ├── contexts/          # React contexts
+│   │   └── ToastContext.tsx # Toast notification context
+│   ├── hooks/             # Custom React hooks
+│   │   ├── index.ts       # Hook exports
+│   │   └── useDebounce.ts # Debounce hook
 │   ├── pages/             # Application pages
-│   │   ├── HomePage.tsx   # Landing page with feature showcase
-│   │   ├── FeaturesPage.tsx # Feature documentation
-│   │   ├── FormDemoPage.tsx # React Hook Form + Zod demo
-│   │   └── ApiDemoPage.tsx  # React Query demo with live API
+│   │   ├── HomePage.tsx   # Comprehensive single page with all demos
+│   │   └── NotFoundPage.tsx # 404 error page
 │   ├── lib/               # Utility functions and configurations
-│   ├── App.tsx            # Root component with routing setup
+│   │   └── query-client.ts # React Query configuration
+│   ├── App.tsx            # Simplified routing setup
 │   ├── main.tsx           # Application entry point
 │   └── globals.css        # Global styles and theme variables
 ├── public/                # Static assets
@@ -211,69 +219,47 @@ The template includes the following npm scripts organized by category:
 
 [↑ Back to Table of Contents](#-table-of-contents)
 
-This template includes fully functional pages that demonstrate real-world usage patterns:
+This template features a comprehensive single-page application that demonstrates real-world usage patterns:
 
-### 🏠 HomePage (`/`)
+### 🏠 Comprehensive HomePage (`/`)
 
-A comprehensive landing page showcasing:
+A complete showcase including all features in one optimized page:
 
-- Hero section with feature highlights
-- Interactive component demonstrations
-- Theme system examples
-- Code snippets and usage patterns
-- Navigation to other demo pages
+- **Hero Section**: Feature highlights with interactive badges
+- **Technology Showcase**: Complete overview of included technologies
+- **Theme System Demo**: Interactive examples of the complete theming system
+- **Form Validation Demo**: Live React Hook Form + Zod examples
+- **Getting Started Guide**: Step-by-step setup instructions
+- **Code Examples**: Real implementation patterns and usage
+- **Performance Features**: Browser support and optimization details
 
-### 🎯 Features Page (`/features`)
+#### 📝 Integrated Form Demos
 
-Detailed documentation of:
+Built-in form demonstrations with React Hook Form + Zod:
 
-- All included technologies
-- Setup instructions
-- Best practices
-- Integration examples
-
-### 📝 Form Demo Page (`/form-demo`)
-
-Live demonstration of React Hook Form + Zod:
-
-- **Login Form**: Email validation, password requirements
-- **Registration Form**: Complex validation rules, real-time feedback
-- **Error Handling**: Form-level and field-level error display
-- **TypeScript Integration**: Fully typed form schemas
+- **Login Form**: Email validation, password requirements, real-time feedback
+- **Registration Form**: Complex validation rules, password confirmation
+- **Error Handling**: Form-level and field-level error display with styling
+- **TypeScript Integration**: Fully typed form schemas and data
 
 ```tsx
 // Example: Type-safe form with Zod validation
 const loginSchema = z.object({
   email: z.string().email('Invalid email address'),
-  password: z.string().min(6, 'Password must be at least 6 characters'),
+  password: z.string().min(8, 'Password must be at least 8 characters'),
 });
 
 type LoginFormData = z.infer<typeof loginSchema>;
 ```
 
-### 🔄 API Demo Page (`/api-demo`)
+#### 🎨 Complete Theme System
 
-Live React Query demonstrations:
+Interactive theme demonstrations:
 
-- **Data Fetching**: Get posts from JSONPlaceholder API
-- **Loading States**: Skeleton loaders and loading indicators
-- **Error Handling**: Automatic retries and error boundaries
-- **Caching**: Background updates and cache invalidation
-- **Mutations**: Create new posts with optimistic updates
-- **DevTools**: React Query DevTools integration
-
-```tsx
-// Example: Typed API queries with React Query
-const {
-  data: posts,
-  isLoading,
-  error,
-} = useQuery({
-  queryKey: ['posts'],
-  queryFn: () => fetch('/api/posts').then(res => res.json()),
-  staleTime: 5 * 60 * 1000, // 5 minutes
-});
-```
+- **Color Palette**: Visual representation of all theme variables
+- **Component Examples**: Buttons, forms, alerts in different states
+- **Code Snippets**: Real usage patterns for theming
+- **Responsive Design**: Mobile-first examples and breakpoints
 
 ### 🧭 Navigation & Layout
 
@@ -302,13 +288,11 @@ The template includes a complete routing setup with React Router v7:
 ### Route Structure
 
 ```tsx
-// App.tsx - Main routing configuration
+// App.tsx - Simplified routing configuration
 import { BrowserRouter, Routes, Route } from 'react-router-dom';
 import Layout from './components/Layout';
 import HomePage from './pages/HomePage';
-import FeaturesPage from './pages/FeaturesPage';
-import FormDemoPage from './pages/FormDemoPage';
-import ApiDemoPage from './pages/ApiDemoPage';
+import NotFoundPage from './pages/NotFoundPage';
 
 function App() {
   return (
@@ -316,9 +300,7 @@ function App() {
       <Routes>
         <Route path="/" element={<Layout />}>
           <Route index element={<HomePage />} />
-          <Route path="features" element={<FeaturesPage />} />
-          <Route path="form-demo" element={<FormDemoPage />} />
-          <Route path="api-demo" element={<ApiDemoPage />} />
+          <Route path="*" element={<NotFoundPage />} />
         </Route>
       </Routes>
     </BrowserRouter>
@@ -1154,9 +1136,11 @@ The template uses optimized git hooks for maximum development speed:
 
 **Pre-push Hook** (`.husky/pre-push`):
 
-- **Smart build verification**: Only builds if source files changed
-- Skips build entirely if only documentation/config changes
-- Saves 30+ seconds when no source changes detected
+- **Enhanced auto-fix capabilities**: Automatically fixes ESLint and Prettier issues
+- **Smart change detection**: Only processes files that have actually changed
+- **Automatic staging**: Auto-stages fixed files for seamless workflow
+- **Smart build verification**: Only builds if source files changed after fixes
+- **Clear feedback**: Notifies about applied fixes and build decisions
 
 **lint-staged configuration:**
 

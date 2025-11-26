@@ -55,6 +55,8 @@ This template features a comprehensive single-page application structure with:
 - ✅ **Zod Validation**: Type-safe schema validation for forms and APIs
 - 🎨 **Lucide React**: Beautiful, customizable icon library with 1000+ icons
 - 📱 **Responsive Pages**: Pre-built pages showcasing all features
+- 🏗️ **Scalable Architecture**: Feature-based organization with clean imports
+- 📦 **Path Mapping**: Clean imports with `@/*` aliases (e.g., `@/components/ui`)
 
 ### 🎨 Design System
 
@@ -62,6 +64,33 @@ This template features a comprehensive single-page application structure with:
 - 🌓 Dark mode support out of the box
 - 📱 Responsive design ready
 - 🚀 Optimized for Tailwind CSS v4
+
+### 📦 Clean Import System
+
+This template includes a configured path mapping system for clean, maintainable imports:
+
+```tsx
+// ✅ Clean imports with path mapping
+import { Button } from '@/components/ui';
+import { Layout } from '@/components/layout';
+import { useAuth } from '@/features/auth';
+import { API_CONFIG } from '@/utils/constants';
+import { formatDate } from '@/utils/helpers';
+
+// ✅ Barrel exports for organized imports
+import { Toast, ToastContainer } from '@/components/ui';
+import { ErrorBoundary } from '@/components';
+
+// ❌ Instead of messy relative imports
+import Button from '../../../components/ui/Button';
+import Layout from '../../components/layout/Layout';
+```
+
+**Path Mapping Configuration:**
+
+- `@/*` maps to `src/*` (configured in `tsconfig.app.json` and `vite.config.ts`)
+- Index files provide clean barrel exports
+- IntelliSense and auto-imports work seamlessly
 
 ### ⚛️ Modern React Stack
 
@@ -141,39 +170,71 @@ This template combines the following technologies to provide a modern developmen
 
 [↑ Back to Table of Contents](#-table-of-contents)
 
+This template follows a **scalable, feature-based architecture** designed for maintainability and future growth. See [STRUCTURE.md](STRUCTURE.md) for detailed documentation.
+
 ```
 template-react-ts/
 ├── .husky/                # Git hooks configuration
 │   ├── pre-commit         # Lint staged files before commit
 │   └── pre-push           # Enhanced with auto-fix capabilities
 ├── src/
-│   ├── components/        # Reusable components
-│   │   ├── Layout.tsx     # Simplified navigation layout
-│   │   ├── ThemeToggle.tsx # Dark mode toggle component
-│   │   ├── ErrorBoundary.tsx # Enhanced error handling UI
-│   │   ├── Toast.tsx      # Toast notification component
-│   │   └── ToastContainer.tsx # Toast container
-│   ├── contexts/          # React contexts
-│   │   └── ToastContext.tsx # Toast notification context
-│   ├── hooks/             # Custom React hooks
-│   │   ├── index.ts       # Hook exports
-│   │   └── useDebounce.ts # Debounce hook
-│   ├── pages/             # Application pages
-│   │   ├── HomePage.tsx   # Comprehensive single page with all demos
-│   │   └── NotFoundPage.tsx # 404 error page
-│   ├── lib/               # Utility functions and configurations
-│   │   └── query-client.ts # React Query configuration
-│   ├── App.tsx            # Simplified routing setup
+│   ├── 📁 app/            # Application configuration and setup
+│   │   ├── App.tsx        # Main app component
+│   │   ├── providers.tsx  # Global providers (React Query, Toast, etc.)
+│   │   ├── router.tsx     # Application routing configuration
+│   │   └── index.ts       # App exports
+│   ├── 📁 components/     # Reusable components organized by type
+│   │   ├── 📁 ui/         # Basic UI components
+│   │   │   ├── Toast.tsx
+│   │   │   ├── ToastContainer.tsx
+│   │   │   └── index.ts
+│   │   ├── 📁 layout/     # Layout-specific components
+│   │   │   ├── Layout.tsx
+│   │   │   ├── ThemeToggle.tsx
+│   │   │   └── index.ts
+│   │   ├── ErrorBoundary.tsx # Global error boundary
+│   │   └── index.ts       # Component exports
+│   ├── 📁 contexts/       # React contexts
+│   │   └── ToastContext.tsx
+│   ├── 📁 features/       # Feature-based modules (self-contained)
+│   │   └── README.md      # Feature architecture documentation
+│   ├── 📁 hooks/          # Custom React hooks
+│   │   ├── useDebounce.ts
+│   │   └── index.ts
+│   ├── 📁 lib/            # Third-party library configurations
+│   │   └── query-client.ts
+│   ├── 📁 pages/          # Page components
+│   │   ├── HomePage.tsx
+│   │   └── NotFoundPage.tsx
+│   ├── 📁 styles/         # Global styles and themes
+│   │   └── globals.css    # Theme system & global styles
+│   ├── 📁 types/          # TypeScript type definitions
+│   │   └── index.ts       # Common types (API, UI, Theme, etc.)
+│   ├── 📁 utils/          # Utility functions and constants
+│   │   ├── constants.ts   # Application constants
+│   │   ├── helpers.ts     # Utility functions
+│   │   └── index.ts
 │   ├── main.tsx           # Application entry point
-│   └── globals.css        # Global styles and theme variables
+│   └── vite-env.d.ts      # Vite type definitions
 ├── public/                # Static assets
 ├── index.html             # HTML template
 ├── vite.config.ts         # Vite configuration
 ├── tsconfig.json          # TypeScript configuration
 ├── eslint.config.js       # ESLint configuration
+├── STRUCTURE.md           # Detailed architecture documentation
 ├── PERFORMANCE.md         # Performance optimization guide
 └── package.json           # Project dependencies and scripts
 ```
+
+### 🏗️ Architecture Highlights
+
+- **🎯 Feature-Based**: Organized for scalability and team development
+- **📦 Clean Imports**: Path mapping (`@/*`) for maintainable code
+- **🎨 Component Organization**: UI, layout, and feature-specific separation
+- **📚 Type Safety**: Centralized TypeScript definitions
+- **⚡ Performance**: Optimized structure for build and runtime performance
+
+> 📖 **Detailed Guide**: See [STRUCTURE.md](STRUCTURE.md) for comprehensive architecture documentation, migration guide, and best practices.
 
 ## Available Scripts
 
@@ -288,33 +349,26 @@ The template includes a complete routing setup with React Router v7:
 ### Route Structure
 
 ```tsx
-// App.tsx - Simplified routing configuration
-import { BrowserRouter, Routes, Route } from 'react-router-dom';
-import Layout from './components/Layout';
-import HomePage from './pages/HomePage';
-import NotFoundPage from './pages/NotFoundPage';
+// App.tsx - Clean, organized application setup
+import App from './app';
 
-function App() {
-  return (
-    <BrowserRouter>
-      <Routes>
-        <Route path="/" element={<Layout />}>
-          <Route index element={<HomePage />} />
-          <Route path="*" element={<NotFoundPage />} />
-        </Route>
-      </Routes>
-    </BrowserRouter>
-  );
-}
+export default App;
 ```
+
+The app is now organized with a clear separation of concerns:
+
+- **`app/App.tsx`**: Main application component
+- **`app/providers.tsx`**: Global providers setup
+- **`app/router.tsx`**: Application routing configuration
 
 ### Layout Component
 
 Shared layout with navigation:
 
 ```tsx
-// components/Layout.tsx
+// components/layout/Layout.tsx
 import { Outlet, Link, useLocation } from 'react-router-dom';
+import ThemeToggle from './ThemeToggle';
 
 const Layout = () => {
   const location = useLocation();
@@ -326,7 +380,7 @@ const Layout = () => {
         <Link to="/" className={location.pathname === '/' ? 'active' : ''}>
           Home
         </Link>
-        {/* More navigation items */}
+        <ThemeToggle />
       </nav>
       <main>
         <Outlet /> {/* Child routes render here */}
@@ -335,6 +389,8 @@ const Layout = () => {
     </div>
   );
 };
+
+export default Layout;
 ```
 
 ### Navigation Features
@@ -353,25 +409,23 @@ Complete server state management with TanStack Query:
 ### Query Client Configuration
 
 ```tsx
-// App.tsx - Query client setup
-import { QueryClient, QueryClientProvider } from '@tanstack/react-query';
+// App configuration with providers
+// app/providers.tsx
+import { QueryClientProvider } from '@tanstack/react-query';
 import { ReactQueryDevtools } from '@tanstack/react-query-devtools';
+import { ToastProvider } from '@/contexts/ToastContext';
+import ToastContainer from '@/components/ui/ToastContainer';
+import { queryClient } from '@/lib/query-client';
 
-const queryClient = new QueryClient({
-  defaultOptions: {
-    queries: {
-      staleTime: 5 * 60 * 1000, // 5 minutes
-      refetchOnWindowFocus: false,
-    },
-  },
-});
-
-function App() {
+export function AppProviders({ children }: { children: React.ReactNode }) {
   return (
-    <QueryClientProvider client={queryClient}>
-      {/* Your app */}
-      <ReactQueryDevtools initialIsOpen={false} />
-    </QueryClientProvider>
+    <ToastProvider>
+      <QueryClientProvider client={queryClient}>
+        {children}
+        <ReactQueryDevtools initialIsOpen={false} />
+        <ToastContainer />
+      </QueryClientProvider>
+    </ToastProvider>
   );
 }
 ```
@@ -665,7 +719,7 @@ placeholder="Enter your text..." />
 
 #### 1. Understanding the Theme File Structure
 
-The theme is defined in `src/globals.css` using Tailwind CSS v4's `@theme` directive:
+The theme is defined in `src/styles/globals.css` using Tailwind CSS v4's `@theme` directive:
 
 ```css
 @theme {
@@ -1035,7 +1089,7 @@ This comprehensive theming system provides the foundation for creating beautiful
 
 This template includes a ready-to-use dark mode implementation:
 
-1. **Theme Toggle Component**: Located at `src/components/ThemeToggle.tsx`, this component provides a button to switch between light and dark modes.
+1. **Theme Toggle Component**: Located at `src/components/layout/ThemeToggle.tsx`, this component provides a button to switch between light and dark modes.
 
 2. **Local Storage**: User preference is saved to local storage so it persists between visits.
 
@@ -1044,7 +1098,7 @@ This template includes a ready-to-use dark mode implementation:
 4. **Implementation Example**:
 
 ```jsx
-import ThemeToggle from './components/ThemeToggle';
+import { ThemeToggle } from '@/components/layout';
 
 function MyComponent() {
   return (
@@ -1360,23 +1414,40 @@ const appTitle = import.meta.env.VITE_APP_TITLE;
 
 ### Folder Structure Best Practices
 
-As your project grows, consider organizing files like this:
+This template already implements a scalable folder structure. As your project grows, you can extend it with feature-based modules:
 
 ```
 src/
-├── components/           # Reusable UI components
-│   ├── ui/              # Basic UI components (buttons, inputs, etc.)
-│   ├── layout/          # Layout components (header, footer, etc.)
-│   └── forms/           # Form-specific components
-├── pages/               # Page components
-├── hooks/               # Custom React hooks
-├── utils/               # Utility functions
-├── services/            # API services and external integrations
-├── stores/              # State management (if using Zustand/Redux)
-├── types/               # TypeScript type definitions
-├── constants/           # App constants and configurations
-└── assets/              # Images, fonts, and other static assets
+├── 📁 app/              # Application configuration and setup
+├── 📁 components/       # Reusable components organized by type
+│   ├── 📁 ui/          # Basic UI components (buttons, inputs, etc.)
+│   ├── 📁 layout/      # Layout components (header, footer, etc.)
+│   └── ErrorBoundary.tsx # Global components
+├── 📁 features/        # Feature-based modules
+│   ├── auth/           # Authentication feature
+│   ├── dashboard/      # Dashboard feature
+│   └── profile/        # User profile feature
+├── 📁 hooks/           # Custom React hooks
+├── 📁 lib/            # Third-party library configurations
+├── 📁 pages/          # Page components
+├── 📁 styles/         # Global styles and themes
+├── 📁 types/          # TypeScript type definitions
+├── 📁 utils/          # Utility functions and constants
+└── main.tsx           # Application entry point
 ```
+
+Each feature in `features/` follows this structure:
+
+```
+features/auth/
+├── components/       # Feature-specific components
+├── hooks/           # Feature-specific hooks
+├── types/           # Feature-specific types
+├── api/            # Feature-specific API calls
+└── index.ts        # Feature exports
+```
+
+See [STRUCTURE.md](STRUCTURE.md) for detailed architecture documentation.
 
 ## Adding Dependencies
 

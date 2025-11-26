@@ -6,16 +6,54 @@ CHANGED_FILES=$(git diff --name-only @{push}..HEAD 2>/dev/null || git diff --nam
 SOURCE_CHANGED=$(echo "$CHANGED_FILES" | grep -E '\.(ts|tsx|js|jsx|json)$' || true)
 
 if [ -z "$SOURCE_CHANGED" ]; then
-  echo "📦 No source files changed, skipping build check"
+  echo "📦 No source files changed, skipping checks"
   exit 0
 fi
 
-echo "📦 Source files changed, running build check..."
-npm run type-check && npm run build
+echo "📦 Source files changed, running full codebase checks..."
 
-if [ $? -eq 0 ]; then
-  echo "✅ Build check passed!"
-else
-  echo "❌ Build check failed!"
+# Step 1: Run ESLint with auto-fix
+echo "🔍 Running ESLint with auto-fix..."
+npm run lint:fix
+if [ $? -ne 0 ]; then
+  echo "❌ ESLint failed! Please fix remaining linting errors manually before pushing."
   exit 1
 fi
+echo "✅ ESLint passed (auto-fixed issues where possible)!"
+
+# Step 2: Run Prettier to auto-format
+echo "💅 Running Prettier to auto-format code..."
+npm run format:all
+if [ $? -ne 0 ]; then
+  echo "❌ Prettier formatting failed!"
+  exit 1
+fi
+echo "✅ Code formatted successfully!"
+
+# Step 3: Check if there are any changes after auto-fixes
+CHANGES_AFTER_FIX=$(git diff --name-only)
+if [ -n "$CHANGES_AFTER_FIX" ]; then
+  echo "📝 Auto-fixes were applied. Staging changes..."
+  git add .
+  echo "✨ Changes have been staged. You may want to review them before pushing."
+fi
+
+# Step 4: Run TypeScript type checking
+echo "🔍 Running TypeScript type check..."
+npm run type-check
+if [ $? -ne 0 ]; then
+  echo "❌ TypeScript type check failed! Please fix type errors before pushing."
+  exit 1
+fi
+echo "✅ TypeScript type check passed!"
+
+# Step 5: Run build
+echo "🏗️  Running build..."
+npm run build
+if [ $? -ne 0 ]; then
+  echo "❌ Build failed! Please fix build errors before pushing."
+  exit 1
+fi
+echo "✅ Build check passed!"
+
+echo "🎉 All pre-push checks passed successfully!"

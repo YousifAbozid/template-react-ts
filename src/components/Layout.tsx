@@ -1,17 +1,7 @@
-import { Outlet, Link, useLocation } from 'react-router-dom';
+import { Outlet, Link } from 'react-router-dom';
 import ThemeToggle from './ThemeToggle';
-import { Home, Star, FileText, Database } from 'lucide-react';
 
 const Layout = () => {
-  const location = useLocation();
-
-  const navigation = [
-    { name: 'Home', href: '/', icon: Home },
-    { name: 'Features', href: '/features', icon: Star },
-    { name: 'Form Demo', href: '/form-demo', icon: FileText },
-    { name: 'API Demo', href: '/api-demo', icon: Database },
-  ];
-
   return (
     <div className="min-h-screen bg-l-bg-1 dark:bg-d-bg-1 text-l-text-1 dark:text-d-text-1 overflow-x-hidden">
       {/* Navigation */}
@@ -23,57 +13,9 @@ const Layout = () => {
               React Template
             </Link>
 
-            {/* Navigation Links */}
-            <div className="hidden md:flex items-center space-x-1">
-              {navigation.map(item => {
-                const Icon = item.icon;
-                const isActive = location.pathname === item.href;
-
-                return (
-                  <Link
-                    key={item.name}
-                    to={item.href}
-                    className={`inline-flex items-center gap-2 px-4 py-2 rounded-lg font-medium transition-all duration-200 ${
-                      isActive
-                        ? 'bg-accent-1 text-white shadow-md'
-                        : 'text-l-text-2 dark:text-d-text-2 hover:text-accent-1 hover:bg-l-bg-3 dark:hover:bg-d-bg-3'
-                    }`}
-                  >
-                    <Icon size={18} />
-                    {item.name}
-                  </Link>
-                );
-              })}
-            </div>
-
             {/* Theme Toggle */}
             <div className="shrink-0">
               <ThemeToggle />
-            </div>
-          </div>
-
-          {/* Mobile Navigation */}
-          <div className="md:hidden pb-4">
-            <div className="flex flex-wrap gap-2 -mx-1">
-              {navigation.map(item => {
-                const Icon = item.icon;
-                const isActive = location.pathname === item.href;
-
-                return (
-                  <Link
-                    key={item.name}
-                    to={item.href}
-                    className={`inline-flex items-center gap-2 px-3 py-2 rounded-lg text-sm font-medium transition-all duration-200 ${
-                      isActive
-                        ? 'bg-accent-1 text-white shadow-md'
-                        : 'text-l-text-2 dark:text-d-text-2 hover:text-accent-1 hover:bg-l-bg-3 dark:hover:bg-d-bg-3'
-                    }`}
-                  >
-                    <Icon size={16} />
-                    {item.name}
-                  </Link>
-                );
-              })}
             </div>
           </div>
         </div>

@@ -7,7 +7,9 @@ export default function NotFoundPage() {
       <div className="max-w-md w-full text-center">
         {/* 404 Large Number */}
         <div className="mb-8">
-          <h1 className="text-9xl font-bold text-accent-1 opacity-20">404</h1>
+          <h1 className="text-9xl font-bold text-accent-1 opacity-20 mb-4">
+            404
+          </h1>
           <h2 className="text-3xl font-bold text-l-text-1 dark:text-d-text-1 -mt-8">
             Page Not Found
           </h2>
@@ -47,40 +49,21 @@ export default function NotFoundPage() {
               Looking for something specific?
             </p>
             <Link
-              to="/features"
+              to="/"
               className="inline-flex items-center gap-2 text-accent-1 hover:text-accent-2 text-sm transition-colors"
             >
               <Search className="h-4 w-4" />
-              Explore Features
+              Browse Homepage
             </Link>
           </div>
         </div>
 
-        {/* Popular Links */}
+        {/* Help text */}
         <div className="mt-8 pt-6 border-t border-border-l dark:border-border-d">
-          <p className="text-l-text-3 dark:text-d-text-3 text-sm mb-3">
-            Popular pages:
+          <p className="text-l-text-3 dark:text-d-text-3 text-sm">
+            Visit our homepage to explore all available features including
+            forms, API demos, and more.
           </p>
-          <div className="flex flex-wrap justify-center gap-2">
-            <Link
-              to="/features"
-              className="px-3 py-1 text-sm bg-l-bg-2 dark:bg-d-bg-2 hover:bg-l-bg-hover dark:hover:bg-d-bg-hover text-l-text-2 dark:text-d-text-2 border border-border-l dark:border-border-d rounded transition-colors"
-            >
-              Features
-            </Link>
-            <Link
-              to="/form-demo"
-              className="px-3 py-1 text-sm bg-l-bg-2 dark:bg-d-bg-2 hover:bg-l-bg-hover dark:hover:bg-d-bg-hover text-l-text-2 dark:text-d-text-2 border border-border-l dark:border-border-d rounded transition-colors"
-            >
-              Form Demo
-            </Link>
-            <Link
-              to="/api-demo"
-              className="px-3 py-1 text-sm bg-l-bg-2 dark:bg-d-bg-2 hover:bg-l-bg-hover dark:hover:bg-d-bg-hover text-l-text-2 dark:text-d-text-2 border border-border-l dark:border-border-d rounded transition-colors"
-            >
-              API Demo
-            </Link>
-          </div>
         </div>
       </div>
     </div>

@@ -91,30 +91,32 @@ export class ErrorBoundary extends Component<Props, State> {
               </details>
             )}
 
-            <div className="flex flex-col sm:flex-row gap-3">
+            <div className="space-y-3">
               <button
                 onClick={this.handleReset}
-                className="flex-1 flex items-center justify-center gap-2 px-4 py-2 bg-accent-1 hover:bg-accent-2 text-white rounded-md transition-colors"
+                className="w-full flex items-center justify-center gap-3 px-6 py-3 bg-accent-1 hover:bg-accent-2 text-white rounded-lg font-medium transition-all duration-200 transform hover:scale-105 shadow-md cursor-pointer"
               >
-                <RefreshCw className="h-4 w-4" />
-                Try Again
+                <RefreshCw className="h-5 w-5" />
+                <span>Try Again</span>
               </button>
 
-              <button
-                onClick={this.handleRefresh}
-                className="flex-1 flex items-center justify-center gap-2 px-4 py-2 bg-l-bg-3 dark:bg-d-bg-3 hover:bg-l-bg-hover dark:hover:bg-d-bg-hover text-l-text-1 dark:text-d-text-1 border border-border-l dark:border-border-d rounded-md transition-colors"
-              >
-                <RefreshCw className="h-4 w-4" />
-                Reload Page
-              </button>
+              <div className="grid grid-cols-1 sm:grid-cols-2 gap-3">
+                <button
+                  onClick={this.handleRefresh}
+                  className="flex items-center justify-center gap-3 px-4 py-3 bg-l-bg-3 dark:bg-d-bg-3 hover:bg-l-bg-hover dark:hover:bg-d-bg-hover text-l-text-1 dark:text-d-text-1 border border-border-l dark:border-border-d rounded-lg font-medium transition-all duration-200 cursor-pointer"
+                >
+                  <RefreshCw className="h-4 w-4" />
+                  <span>Reload Page</span>
+                </button>
 
-              <button
-                onClick={this.handleGoHome}
-                className="flex-1 flex items-center justify-center gap-2 px-4 py-2 bg-l-bg-3 dark:bg-d-bg-3 hover:bg-l-bg-hover dark:hover:bg-d-bg-hover text-l-text-1 dark:text-d-text-1 border border-border-l dark:border-border-d rounded-md transition-colors"
-              >
-                <Home className="h-4 w-4" />
-                Go Home
-              </button>
+                <button
+                  onClick={this.handleGoHome}
+                  className="flex items-center justify-center gap-3 px-4 py-3 bg-l-bg-3 dark:bg-d-bg-3 hover:bg-l-bg-hover dark:hover:bg-d-bg-hover text-l-text-1 dark:text-d-text-1 border border-border-l dark:border-border-d rounded-lg font-medium transition-all duration-200 cursor-pointer"
+                >
+                  <Home className="h-4 w-4" />
+                  <span>Go Home</span>
+                </button>
+              </div>
             </div>
           </div>
         </div>

@@ -30,14 +30,14 @@
   "dependencies": {
     "@hookform/resolvers": "^5.2.2",
     "@tailwindcss/vite": "^4.1.17",
-    "@tanstack/react-query": "^5.90.11",
+    "@tanstack/react-query": "^5.90.12",
     "@tanstack/react-query-devtools": "^5.91.1",
-    "framer-motion": "^12.23.24",
-    "lucide-react": "^0.555.0",
-    "react": "^19.2.0",
-    "react-dom": "^19.2.0",
-    "react-hook-form": "^7.67.0",
-    "react-router-dom": "^7.9.6",
+    "framer-motion": "^12.23.25",
+    "lucide-react": "^0.556.0",
+    "react": "^19.2.1",
+    "react-dom": "^19.2.1",
+    "react-hook-form": "^7.68.0",
+    "react-router-dom": "^7.10.1",
     "tailwindcss": "^4.1.17",
     "use-local-storage": "^3.0.0",
     "zod": "^4.1.13"
@@ -58,13 +58,13 @@
     "globals": "^16.5.0",
     "husky": "^9.1.7",
     "lint-staged": "^16.2.7",
-    "prettier": "^3.7.3",
+    "prettier": "^3.7.4",
     "rollup-plugin-visualizer": "^6.0.5",
     "terser": "^5.44.1",
     "typescript": "~5.9.3",
-    "typescript-eslint": "^8.48.0",
-    "vite": "^7.2.4",
-    "vite-bundle-analyzer": "^1.2.3"
+    "typescript-eslint": "^8.48.1",
+    "vite": "^7.2.6",
+    "vite-bundle-analyzer": "^1.2.4"
   },
   "lint-staged": {
     "*.{js,jsx,ts,tsx}": [

@@ -36,17 +36,18 @@ npx lint-staged || {
 echo "✅ Lint-staged passed! Files are formatted, linted, and auto-staged."
 echo ""
 
-# Step 2: Type-check staged TypeScript files
+# Step 2: Type-check staged TypeScript files  
 STAGED_TS_FILES=$(echo "$STAGED_FILES" | grep -E '\.(ts|tsx)$' || true)
 
 if [ -n "$STAGED_TS_FILES" ]; then
-  echo "🔍 Running TypeScript type-check on staged files..."
+  echo "🔍 Running TypeScript type-check..."
   npm run type-check || {
     echo ""
     echo "❌ TypeScript type-check failed!"
     echo ""
     echo "Type errors found in your code."
     echo "Please fix the type errors above before committing."
+    echo "Run 'npm run type-check' to see the full errors."
     echo ""
     exit 1
   }

@@ -1,59 +1,127 @@
 #!/bin/sh
 echo "🚀 Running pre-push checks..."
+echo ""
+echo "This ensures the entire codebase is production-ready before pushing."
+echo ""
 
 # Check if any source files changed since last push
-CHANGED_FILES=$(git diff --name-only @{push}..HEAD 2>/dev/null || git diff --name-only HEAD~1..HEAD)
-SOURCE_CHANGED=$(echo "$CHANGED_FILES" | grep -E '\.(ts|tsx|js|jsx|json)$' || true)
+CHANGED_FILES=$(git diff --name-only @{push}..HEAD 2>/dev/null || git diff --name-only HEAD~1..HEAD 2>/dev/null || git diff --name-only --cached)
+SOURCE_CHANGED=$(echo "$CHANGED_FILES" | grep -E '\.(ts|tsx|js|jsx|json|css)$' || true)
 
 if [ -z "$SOURCE_CHANGED" ]; then
-  echo "📦 No source files changed, skipping checks"
+  echo "📦 No source files changed since last push."
+  echo "✅ Skipping pre-push checks."
+  echo ""
   exit 0
 fi
 
-echo "📦 Source files changed, running full codebase checks..."
+echo "📦 Source files changed detected. Running comprehensive checks..."
+echo ""
 
-# Step 1: Run ESLint with auto-fix
-echo "🔍 Running ESLint with auto-fix..."
+# Step 1: ESLint - Check entire codebase and auto-fix
+echo "🔍 Step 1/4: Running ESLint on entire codebase..."
 npm run lint:fix
-if [ $? -ne 0 ]; then
-  echo "❌ ESLint failed! Please fix remaining linting errors manually before pushing."
-  exit 1
-fi
-echo "✅ ESLint passed (auto-fixed issues where possible)!"
+LINT_EXIT_CODE=$?
 
-# Step 2: Run Prettier to auto-format
-echo "💅 Running Prettier to auto-format code..."
-npm run format:all
-if [ $? -ne 0 ]; then
-  echo "❌ Prettier formatting failed!"
+if [ $LINT_EXIT_CODE -ne 0 ]; then
+  echo ""
+  echo "❌ ESLint failed!"
+  echo ""
+  echo "There are linting errors that couldn't be auto-fixed."
+  echo "Please review the errors above and fix them manually."
+  echo ""
   exit 1
 fi
+
+echo "✅ ESLint passed (with auto-fixes applied)!"
+echo ""
+
+# Step 2: Prettier - Format entire codebase
+echo "💅 Step 2/4: Running Prettier on entire codebase..."
+npm run format
+FORMAT_EXIT_CODE=$?
+
+if [ $FORMAT_EXIT_CODE -ne 0 ]; then
+  echo ""
+  echo "❌ Prettier formatting failed!"
+  echo ""
+  exit 1
+fi
+
 echo "✅ Code formatted successfully!"
+echo ""
 
 # Step 3: Check if there are any changes after auto-fixes
 CHANGES_AFTER_FIX=$(git diff --name-only)
 if [ -n "$CHANGES_AFTER_FIX" ]; then
-  echo "📝 Auto-fixes were applied. Staging changes..."
-  git add .
-  echo "✨ Changes have been staged. You may want to review them before pushing."
+  echo "📝 Auto-fixes were applied to these files:"
+  echo "$CHANGES_AFTER_FIX" | sed 's/^/   • /'
+  echo ""
+  echo "⚠️  These changes have been auto-fixed but NOT staged."
+  echo ""
+  echo "Options:"
+  echo "   1. Review the changes: git diff"
+  echo "   2. Stage them: git add ."
+  echo "   3. Amend your commit: git commit --amend --no-edit"
+  echo "   4. Or commit them separately: git commit -m 'chore: apply auto-fixes'"
+  echo ""
+  echo "💡 Tip: The changes are formatted/linted, safe to stage!"
+  echo ""
+  
+  # Ask user if they want to stage the changes
+  read -p "Would you like to stage these changes now? (y/N): " -n 1 -r
+  echo ""
+  if [[ $REPLY =~ ^[Yy]$ ]]; then
+    git add .
+    echo "✅ Changes staged! You may want to amend your commit."
+    echo ""
+  fi
 fi
 
-# Step 4: Run TypeScript type checking
-echo "🔍 Running TypeScript type check..."
+# Step 4: TypeScript type-check
+echo "🔍 Step 3/4: Running TypeScript type-check..."
 npm run type-check
-if [ $? -ne 0 ]; then
-  echo "❌ TypeScript type check failed! Please fix type errors before pushing."
+TYPE_EXIT_CODE=$?
+
+if [ $TYPE_EXIT_CODE -ne 0 ]; then
+  echo ""
+  echo "❌ TypeScript type-check failed!"
+  echo ""
+  echo "There are type errors in your code."
+  echo "Please fix the type errors above before pushing."
+  echo ""
   exit 1
 fi
-echo "✅ TypeScript type check passed!"
 
-# Step 5: Run build
-echo "🏗️  Running build..."
+echo "✅ TypeScript type-check passed!"
+echo ""
+
+# Step 5: Production build
+echo "🏗️  Step 4/4: Running production build..."
 npm run build
-if [ $? -ne 0 ]; then
-  echo "❌ Build failed! Please fix build errors before pushing."
+BUILD_EXIT_CODE=$?
+
+if [ $BUILD_EXIT_CODE -ne 0 ]; then
+  echo ""
+  echo "❌ Production build failed!"
+  echo ""
+  echo "Your code has build errors. Cannot push broken builds."
+  echo "Please fix the build errors above before pushing."
+  echo ""
   exit 1
 fi
-echo "✅ Build check passed!"
 
-echo "🎉 All pre-push checks passed successfully!"
+echo "✅ Production build successful!"
+echo ""
+
+echo "╔════════════════════════════════════════════════════════╗"
+echo "║  🎉 All pre-push checks passed successfully!          ║"
+echo "║                                                        ║"
+echo "║  ✅ ESLint     - No errors                            ║"
+echo "║  ✅ Prettier   - Code formatted                       ║"
+echo "║  ✅ TypeScript - No type errors                       ║"
+echo "║  ✅ Build      - Production build successful          ║"
+echo "║                                                        ║"
+echo "║  Your code is production-ready! 🚀                    ║"
+echo "╔════════════════════════════════════════════════════════╗"
+echo ""

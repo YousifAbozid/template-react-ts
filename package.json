@@ -15,11 +15,12 @@
     "build:analyze": "cross-env ANALYZE=true npm run build && npx vite-bundle-analyzer dist",
     "analyze": "npx vite-bundle-analyzer dist",
     "type-check": "tsc --noEmit --incremental --tsBuildInfoFile .tsbuildinfo",
-    "lint": "eslint --ext .js,.jsx,.ts,.tsx src --cache --cache-location .eslintcache",
-    "lint:fix": "eslint --ext .js,.jsx,.ts,.tsx src --fix --cache --cache-location .eslintcache",
-    "format:all": "prettier --write \"**/*.{js,jsx,ts,tsx,json,md}\"",
-    "format:check": "prettier --check \"**/*.{js,jsx,ts,tsx,json,md}\"",
-    "fix-all": "npm run lint:fix && npm run format:all",
+    "lint": "eslint src --cache --cache-location .eslintcache",
+    "lint:fix": "eslint src --fix --cache --cache-location .eslintcache",
+    "format": "prettier --write \"**/*.{js,jsx,ts,tsx,json,md,css,scss}\"",
+    "format:check": "prettier --check \"**/*.{js,jsx,ts,tsx,json,md,css,scss}\"",
+    "fix": "npm run lint:fix && npm run format",
+    "test": "npm run format:check && npm run lint && npm run type-check",
     "fix-staged": "lint-staged",
     "upgrade": "npx npm-check-updates -u && npm install",
     "prepare": "husky"
@@ -67,10 +68,10 @@
   },
   "lint-staged": {
     "*.{js,jsx,ts,tsx}": [
-      "eslint --fix --cache --cache-location .eslintcache",
+      "eslint --fix --cache --cache-location .eslintcache --no-warn-ignored",
       "prettier --write"
     ],
-    "*.{json,md}": [
+    "*.{css,scss,json,md}": [
       "prettier --write"
     ]
   }

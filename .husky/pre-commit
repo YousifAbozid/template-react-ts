@@ -1,9 +1,60 @@
+#!/bin/sh
 echo "🔍 Running pre-commit hooks..."
+echo ""
 
-# Run lint-staged with stricter settings
-npx lint-staged --verbose --no-stash || {
-  echo "❌ lint-staged failed. Please fix the issues above and try committing again."
+# Check if there are staged files
+STAGED_FILES=$(git diff --cached --name-only)
+if [ -z "$STAGED_FILES" ]; then
+  echo "⚠️  No staged files found. Skipping pre-commit checks."
+  exit 0
+fi
+
+# Step 1: Run lint-staged (auto-fix ESLint + format with Prettier)
+echo "📝 Running lint-staged on staged files..."
+echo "   → Auto-fixing ESLint issues"
+echo "   → Formatting with Prettier"
+echo ""
+
+npx lint-staged || {
+  echo ""
+  echo "❌ lint-staged failed!"
+  echo ""
+  echo "Issues found in your staged files:"
+  echo "   • ESLint errors that couldn't be auto-fixed"
+  echo "   • Formatting issues"
+  echo ""
+  echo "What you can do:"
+  echo "   1. Run 'npm run fix' to auto-fix remaining issues"
+  echo "   2. Check the errors above and fix manually"
+  echo "   3. Stage the fixed files: git add <files>"
+  echo "   4. Try committing again"
+  echo ""
   exit 1
 }
 
-echo "✅ Pre-commit checks passed!"
+echo "✅ Lint-staged passed! Files are formatted and linted."
+echo ""
+
+# Step 2: Type-check staged TypeScript files
+STAGED_TS_FILES=$(echo "$STAGED_FILES" | grep -E '\.(ts|tsx)$' || true)
+
+if [ -n "$STAGED_TS_FILES" ]; then
+  echo "🔍 Running TypeScript type-check on staged files..."
+  npm run type-check || {
+    echo ""
+    echo "❌ TypeScript type-check failed!"
+    echo ""
+    echo "Type errors found in your code."
+    echo "Please fix the type errors above before committing."
+    echo ""
+    exit 1
+  }
+  echo "✅ TypeScript type-check passed!"
+  echo ""
+else
+  echo "ℹ️  No TypeScript files staged, skipping type-check."
+  echo ""
+fi
+
+echo "🎉 Pre-commit checks passed! Ready to commit!"
+echo ""

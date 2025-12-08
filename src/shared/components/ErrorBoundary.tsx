@@ -147,3 +147,5 @@ export function useErrorBoundary() {
 
   return { captureError, resetError };
 }
+
+export default ErrorBoundary;

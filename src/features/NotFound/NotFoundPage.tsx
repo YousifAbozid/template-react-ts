@@ -1,7 +1,7 @@
 import { Link } from 'react-router-dom';
 import { Home, ArrowLeft, Search } from 'lucide-react';
 
-export default function NotFoundPage() {
+const NotFoundPage = () => {
   return (
     <div className="min-h-screen bg-background-primary flex items-center justify-center p-4">
       <div className="max-w-md w-full text-center">
@@ -68,4 +68,6 @@ export default function NotFoundPage() {
       </div>
     </div>
   );
-}
+};
+
+export default NotFoundPage;

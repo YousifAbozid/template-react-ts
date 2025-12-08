@@ -1,5 +1,5 @@
 import { useEffect, useState, useRef } from 'react';
-import { Toast as ToastType } from '@/contexts/ToastContext';
+import { Toast as ToastType } from '@/shared/contexts/ToastContext';
 import { motion, AnimatePresence } from 'framer-motion';
 import { AlertCircle, AlertTriangle, Check, Info } from 'lucide-react';
 
@@ -8,7 +8,7 @@ interface ToastProps {
   onRemove: () => void;
 }
 
-export default function Toast({ toast, onRemove }: ToastProps) {
+const Toast = ({ toast, onRemove }: ToastProps) => {
   const [visible, setVisible] = useState(true);
   const progressRef = useRef<HTMLDivElement>(null);
   const startTimeRef = useRef<number>(0);
@@ -130,4 +130,6 @@ export default function Toast({ toast, onRemove }: ToastProps) {
       )}
     </AnimatePresence>
   );
-}
+};
+
+export default Toast;

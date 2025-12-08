@@ -1,8 +1,8 @@
-import { ErrorBoundary } from '@/components/ErrorBoundary';
-import { AppProviders } from './providers';
-import { AppRouter } from './router';
+import { ErrorBoundary } from '@/shared/components/ErrorBoundary';
+import { AppProviders } from './AppProviders';
+import { AppRouter } from './AppRouter';
 
-function App() {
+const App = () => {
   return (
     <ErrorBoundary>
       <AppProviders>
@@ -10,6 +10,6 @@ function App() {
       </AppProviders>
     </ErrorBoundary>
   );
-}
+};
 
 export default App;

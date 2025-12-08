@@ -1,8 +1,8 @@
 import { useMemo } from 'react';
-import { useToast, ToastPosition } from '@/contexts/ToastContext';
+import { useToast, ToastPosition } from '@/shared/contexts/ToastContext';
 import Toast from './Toast';
 
-export default function ToastContainer() {
+const ToastContainer = () => {
   const { toasts, removeToast } = useToast();
 
   const groupedToasts = useMemo(() => {
@@ -80,4 +80,6 @@ export default function ToastContainer() {
       )}
     </>
   );
-}
+};
+
+export default ToastContainer;

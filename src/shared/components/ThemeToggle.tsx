@@ -1,9 +1,9 @@
 import { Moon, Sun, Monitor } from 'lucide-react';
-import { useTheme } from '@/contexts/ThemeProvider';
-import { Button } from '@/components/ui';
+import { useTheme } from '@/shared/contexts/ThemeProvider';
+import { Button } from '@/shared/components/ui';
 import { motion } from 'framer-motion';
 
-export default function ThemeToggle() {
+const ThemeToggle = () => {
   const { theme, setTheme } = useTheme();
 
   const cycleTheme = () => {
@@ -48,4 +48,6 @@ export default function ThemeToggle() {
       <span className="sr-only">Toggle theme</span>
     </Button>
   );
-}
+};
+
+export default ThemeToggle;

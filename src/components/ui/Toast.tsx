@@ -11,13 +11,15 @@ interface ToastProps {
 export default function Toast({ toast, onRemove }: ToastProps) {
   const [visible, setVisible] = useState(true);
   const progressRef = useRef<HTMLDivElement>(null);
-  const startTimeRef = useRef<number>(Date.now());
+  const startTimeRef = useRef<number>(0);
   const animationFrameRef = useRef<number | null>(null);
   const toastDuration = toast.duration;
   const animationDuration = 300; // Exit animation duration in ms
 
   // Start exit animation before removing from DOM
   useEffect(() => {
+    // Initialize start time when effect runs
+    startTimeRef.current = Date.now();
     const visibleDuration = toastDuration - animationDuration;
 
     const timer = setTimeout(() => {
@@ -67,27 +69,27 @@ export default function Toast({ toast, onRemove }: ToastProps) {
       case 'success':
         return {
           icon: <Check className="w-5 h-5" />,
-          bgColor: 'bg-accent-success text-white',
-          progressColor: 'bg-white/60',
+          bgColor: 'bg-accent-success text-text-inverse',
+          progressColor: 'bg-text-inverse/60',
         };
       case 'error':
         return {
           icon: <AlertCircle className="w-5 h-5" />,
-          bgColor: 'bg-accent-danger text-white',
-          progressColor: 'bg-white/60',
+          bgColor: 'bg-accent-error text-text-inverse',
+          progressColor: 'bg-text-inverse/60',
         };
       case 'warning':
         return {
           icon: <AlertTriangle className="w-5 h-5" />,
-          bgColor: 'bg-accent-warning text-l-text-1 dark:text-d-text-1',
-          progressColor: 'bg-l-text-1 dark:bg-d-text-1/60',
+          bgColor: 'bg-accent-warning text-text-inverse',
+          progressColor: 'bg-text-inverse/60',
         };
       case 'info':
       default:
         return {
           icon: <Info className="w-5 h-5" />,
-          bgColor: 'bg-accent-1 text-white',
-          progressColor: 'bg-white/60',
+          bgColor: 'bg-accent-info text-text-inverse',
+          progressColor: 'bg-text-inverse/60',
         };
     }
   };

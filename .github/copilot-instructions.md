@@ -95,7 +95,7 @@ type FormData = z.infer<typeof schema>;
 
 - **React Query**: Pre-configured in `src/lib/query-client.ts` with optimized defaults
 - **Toast system**: Global context in `src/contexts/ToastContext.tsx` with predefined types
-- **Theme persistence**: Uses `use-local-storage` hook with `THEME_CONFIG` constants
+- **Theme persistence**: Uses custom `useLocalStorage` hook from `@/hooks` with `THEME_CONFIG` constants
 
 ### Environment & Build
 

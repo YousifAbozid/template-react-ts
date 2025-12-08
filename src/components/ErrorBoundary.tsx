@@ -63,17 +63,17 @@ export class ErrorBoundary extends Component<Props, State> {
 
       // Default error UI
       return (
-        <div className="min-h-screen bg-l-bg-1 dark:bg-d-bg-1 flex items-center justify-center p-4">
-          <div className="max-w-md w-full bg-l-bg-2 dark:bg-d-bg-2 rounded-lg border border-border-l dark:border-border-d p-6 text-center">
+        <div className="min-h-screen bg-background-primary flex items-center justify-center p-4">
+          <div className="max-w-md w-full bg-background-secondary rounded-lg border border-border-primary p-6 text-center">
             <div className="flex justify-center mb-4">
-              <AlertTriangle className="h-12 w-12 text-accent-danger" />
+              <AlertTriangle className="h-12 w-12 text-accent-error" />
             </div>
 
-            <h1 className="text-xl font-bold text-l-text-1 dark:text-d-text-1 mb-2">
+            <h1 className="text-xl font-bold text-text-primary mb-2">
               Oops! Something went wrong
             </h1>
 
-            <p className="text-l-text-2 dark:text-d-text-2 mb-6">
+            <p className="text-text-secondary mb-6">
               We encountered an unexpected error. Don&apos;t worry, it&apos;s
               not your fault.
             </p>
@@ -81,10 +81,10 @@ export class ErrorBoundary extends Component<Props, State> {
             {/* Show error details in development */}
             {import.meta.env.DEV && this.state.error && (
               <details className="mb-6 text-left">
-                <summary className="cursor-pointer text-l-text-2 dark:text-d-text-2 hover:text-l-text-1 dark:hover:text-d-text-1">
+                <summary className="cursor-pointer text-text-secondary hover:text-text-primary">
                   Error Details (Dev Mode)
                 </summary>
-                <pre className="mt-2 p-3 bg-l-bg-3 dark:bg-d-bg-3 rounded text-xs overflow-auto text-accent-danger">
+                <pre className="mt-2 p-3 bg-background-tertiary rounded text-xs overflow-auto text-accent-error">
                   {this.state.error.toString()}
                   {this.state.errorInfo?.componentStack}
                 </pre>
@@ -94,7 +94,7 @@ export class ErrorBoundary extends Component<Props, State> {
             <div className="space-y-3">
               <button
                 onClick={this.handleReset}
-                className="w-full flex items-center justify-center gap-3 px-6 py-3 bg-accent-1 hover:bg-accent-2 text-white rounded-lg font-medium transition-all duration-200 transform hover:scale-105 shadow-md cursor-pointer"
+                className="w-full flex items-center justify-center gap-3 px-6 py-3 bg-accent-primary hover:bg-accent-secondary text-text-inverse rounded-lg font-medium transition-all duration-200 transform hover:scale-105 shadow-md cursor-pointer"
               >
                 <RefreshCw className="h-5 w-5" />
                 <span>Try Again</span>
@@ -103,7 +103,7 @@ export class ErrorBoundary extends Component<Props, State> {
               <div className="grid grid-cols-1 sm:grid-cols-2 gap-3">
                 <button
                   onClick={this.handleRefresh}
-                  className="flex items-center justify-center gap-3 px-4 py-3 bg-l-bg-3 dark:bg-d-bg-3 hover:bg-l-bg-hover dark:hover:bg-d-bg-hover text-l-text-1 dark:text-d-text-1 border border-border-l dark:border-border-d rounded-lg font-medium transition-all duration-200 cursor-pointer"
+                  className="flex items-center justify-center gap-3 px-4 py-3 bg-background-tertiary hover:bg-background-hover text-text-primary border border-border-primary rounded-lg font-medium transition-all duration-200 cursor-pointer"
                 >
                   <RefreshCw className="h-4 w-4" />
                   <span>Reload Page</span>
@@ -111,7 +111,7 @@ export class ErrorBoundary extends Component<Props, State> {
 
                 <button
                   onClick={this.handleGoHome}
-                  className="flex items-center justify-center gap-3 px-4 py-3 bg-l-bg-3 dark:bg-d-bg-3 hover:bg-l-bg-hover dark:hover:bg-d-bg-hover text-l-text-1 dark:text-d-text-1 border border-border-l dark:border-border-d rounded-lg font-medium transition-all duration-200 cursor-pointer"
+                  className="flex items-center justify-center gap-3 px-4 py-3 bg-background-tertiary hover:bg-background-hover text-text-primary border border-border-primary rounded-lg font-medium transition-all duration-200 cursor-pointer"
                 >
                   <Home className="h-4 w-4" />
                   <span>Go Home</span>

@@ -24,7 +24,7 @@ npx lint-staged || {
   echo "   • Formatting issues"
   echo ""
   echo "What you can do:"
-  echo "   1. Run 'npm run fix' to auto-fix remaining issues"
+  echo "   1. Run 'npm run fix-all' to auto-fix remaining issues"
   echo "   2. Check the errors above and fix manually"
   echo "   3. Stage the fixed files: git add <files>"
   echo "   4. Try committing again"

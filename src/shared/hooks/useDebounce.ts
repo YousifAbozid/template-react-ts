@@ -99,7 +99,7 @@ export function useAdvancedDebounce<T extends (...args: unknown[]) => unknown>(
     return () => {
       cancel();
     };
-  }, []);
+  }, [cancel]);
 
   return {
     debounced: debouncedCallback as T,

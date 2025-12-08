@@ -20,14 +20,8 @@ export default [
   },
 
   js.configs.recommended,
-
-  // TypeScript — only recommended, NOT strict
-  ...tsEslint.configs.recommendedTypeChecked,
-
-  // React
+  ...tsEslint.configs.recommended,
   pluginReact.configs.flat.recommended,
-
-  // React Query
   ...pluginQuery.configs['flat/recommended'],
 
   {
@@ -50,34 +44,23 @@ export default [
       // React rules
       'react/react-in-jsx-scope': 'off',
       'react/jsx-uses-react': 'off',
+      'react/prop-types': 'off',
 
-      // Hooks
+      // React Hooks
       'react-hooks/rules-of-hooks': 'error',
+      'react-hooks/exhaustive-deps': 'warn',
 
       // TypeScript
       '@typescript-eslint/no-unused-vars': [
         'warn',
         { argsIgnorePattern: '^_' }
       ],
-
-      // ❗ turn off bad-fit rules
-      '@typescript-eslint/no-confusing-void-expression': 'off',
-      'import/no-unresolved': 'off',
-      'react-hooks/exhaustive-deps': 'off',
-      'react/prop-types': 'off',
-
-      // Turn off strict TS rules
-      '@typescript-eslint/no-unsafe-return': 'off',
-      '@typescript-eslint/no-misused-promises': 'off'
+      '@typescript-eslint/explicit-function-return-type': 'off',
+      '@typescript-eslint/no-explicit-any': 'warn'
     },
 
     settings: {
-      react: { version: 'detect' },
-      'import/resolver': {
-        typescript: {
-          project: './tsconfig.app.json'
-        }
-      }
+      react: { version: 'detect' }
     }
   }
 ];

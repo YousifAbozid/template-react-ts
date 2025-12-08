@@ -21,6 +21,7 @@
     "format:check": "prettier --check \"**/*.{js,jsx,ts,tsx,json,md,css,scss}\"",
     "fix-all": "npm run lint:fix && npm run format",
     "test": "npm run format:check && npm run lint && npm run type-check",
+    "test:ci": "npm run test && npm run build",
     "fix-staged": "lint-staged",
     "upgrade": "npx npm-check-updates -u && npm install",
     "prepare": "husky"
@@ -49,7 +50,7 @@
     "@types/react": "^19.2.7",
     "@types/react-dom": "^19.2.3",
     "@types/react-router-dom": "^5.3.3",
-    "@vitejs/plugin-react": "^5.1.1",
+    "@vitejs/plugin-react": "^5.1.2",
     "cross-env": "^10.1.0",
     "eslint": "^9.39.1",
     "eslint-plugin-react": "^7.37.5",
@@ -62,9 +63,9 @@
     "rollup-plugin-visualizer": "^6.0.5",
     "terser": "^5.44.1",
     "typescript": "~5.9.3",
-    "typescript-eslint": "^8.48.1",
-    "vite": "^7.2.6",
-    "vite-bundle-analyzer": "^1.2.4"
+    "typescript-eslint": "^8.49.0",
+    "vite": "^7.2.7",
+    "vite-bundle-analyzer": "^1.3.1"
   },
   "lint-staged": {
     "*.{js,jsx,ts,tsx}": [

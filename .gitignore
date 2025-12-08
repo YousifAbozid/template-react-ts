@@ -32,4 +32,4 @@ dist-ssr
 
 # Tool caches
 .eslintcache
-.tsbuildinfo
+*.tsbuildinfo

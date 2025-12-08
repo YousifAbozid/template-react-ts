@@ -1,35 +1,51 @@
-import { useEffect } from 'react';
-import useLocalStorage from 'use-local-storage';
-import { Sun, Moon } from 'lucide-react';
+import { Moon, Sun, Monitor } from 'lucide-react';
+import { useTheme } from '@/contexts/ThemeProvider';
+import { Button } from '@/components/ui';
+import { motion } from 'framer-motion';
 
-const ThemeToggle = () => {
-  const defaultDark = window.matchMedia('(prefers-color-scheme: dark)').matches;
-  const [darkMode, setDarkMode] = useLocalStorage(
-    'theme',
-    defaultDark ? 'dark' : 'light'
-  );
+export default function ThemeToggle() {
+  const { theme, setTheme } = useTheme();
 
-  useEffect(() => {
-    if (darkMode === 'dark') {
-      document.documentElement.classList.add('dark');
+  const cycleTheme = () => {
+    if (theme === 'light') {
+      setTheme('dark');
+    } else if (theme === 'dark') {
+      setTheme('system');
     } else {
-      document.documentElement.classList.remove('dark');
+      setTheme('light');
     }
-  }, [darkMode]);
+  };
+
+  const getIcon = () => {
+    switch (theme) {
+      case 'light':
+        return <Sun className="h-4 w-4" />;
+      case 'dark':
+        return <Moon className="h-4 w-4" />;
+      case 'system':
+        return <Monitor className="h-4 w-4" />;
+      default:
+        return <Monitor className="h-4 w-4" />;
+    }
+  };
 
   return (
-    <button
-      onClick={() => {
-        setDarkMode(darkMode === 'dark' ? 'light' : 'dark');
-      }}
-      className="p-2 rounded-md bg-gray-200 dark:bg-gray-800 dark:text-white flex items-center justify-center cursor-pointer"
-      aria-label={
-        darkMode === 'dark' ? 'Switch to light mode' : 'Switch to dark mode'
-      }
+    <Button
+      variant="ghost"
+      size="icon"
+      onClick={cycleTheme}
+      className="relative"
     >
-      {darkMode === 'dark' ? <Sun size={20} /> : <Moon size={20} />}
-    </button>
+      <motion.div
+        key={theme}
+        initial={{ rotate: -180, opacity: 0 }}
+        animate={{ rotate: 0, opacity: 1 }}
+        exit={{ rotate: 180, opacity: 0 }}
+        transition={{ duration: 0.2 }}
+      >
+        {getIcon()}
+      </motion.div>
+      <span className="sr-only">Toggle theme</span>
+    </Button>
   );
-};
-
-export default ThemeToggle;
+}

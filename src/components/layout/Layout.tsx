@@ -3,13 +3,16 @@ import ThemeToggle from './ThemeToggle';
 
 const Layout = () => {
   return (
-    <div className="min-h-screen bg-l-bg-1 dark:bg-d-bg-1 text-l-text-1 dark:text-d-text-1 overflow-x-hidden">
+    <div className="min-h-screen bg-background-primary text-text-primary overflow-x-hidden">
       {/* Navigation */}
-      <nav className="bg-l-bg-2 dark:bg-d-bg-2 border-b border-border-l dark:border-border-d">
+      <nav className="bg-background-secondary border-b border-border-primary">
         <div className="w-full max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="flex justify-between items-center py-4">
             {/* Logo */}
-            <Link to="/" className="text-xl font-bold text-accent-1 shrink-0">
+            <Link
+              to="/"
+              className="text-xl font-bold text-accent-primary shrink-0"
+            >
               React Template
             </Link>
 
@@ -27,14 +30,14 @@ const Layout = () => {
       </main>
 
       {/* Footer */}
-      <footer className="w-full py-12 bg-l-bg-3 dark:bg-d-bg-3 border-t border-border-l dark:border-border-d">
+      <footer className="w-full py-12 bg-background-tertiary border-t border-border-primary">
         <div className="w-full max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="text-center">
             <div className="mb-6">
-              <h3 className="text-2xl font-bold mb-2 text-l-text-1 dark:text-d-text-1">
+              <h3 className="text-2xl font-bold mb-2 text-text-primary">
                 React TypeScript Template
               </h3>
-              <p className="text-l-text-2 dark:text-d-text-2">
+              <p className="text-text-secondary">
                 Modern, production-ready template with routing, forms, and API
                 integration
               </p>
@@ -45,13 +48,13 @@ const Layout = () => {
                 href="https://github.com/YousifAbozid/template-react-ts#readme"
                 target="_blank"
                 rel="noopener noreferrer"
-                className="bg-accent-1 hover:bg-accent-2 text-white px-8 py-4 rounded-lg font-semibold transition-all duration-300 transform hover:scale-105 shadow-lg"
+                className="bg-accent-primary hover:bg-accent-secondary text-text-inverse px-8 py-4 rounded-lg font-semibold transition-all duration-300 transform hover:scale-105 shadow-lg"
               >
                 Documentation
               </a>
             </div>
 
-            <div className="text-l-text-3 dark:text-d-text-3">
+            <div className="text-text-tertiary">
               <p className="text-center wrap-break-word">
                 React 19 + TypeScript + Vite + Tailwind CSS v4 + React Router +
                 React Query
@@ -62,7 +65,7 @@ const Layout = () => {
                   href="https://github.com/YousifAbozid"
                   target="_blank"
                   rel="noopener noreferrer"
-                  className="text-accent-1 hover:underline"
+                  className="text-accent-primary hover:underline"
                 >
                   Yousif Abozid
                 </a>

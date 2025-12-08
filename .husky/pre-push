@@ -57,25 +57,14 @@ if [ -n "$CHANGES_AFTER_FIX" ]; then
   echo "📝 Auto-fixes were applied to these files:"
   echo "$CHANGES_AFTER_FIX" | sed 's/^/   • /'
   echo ""
-  echo "⚠️  These changes have been auto-fixed but NOT staged."
+  echo "🔄 Auto-staging the fixed files..."
+  git add .
+  echo "✅ Changes have been automatically staged!"
   echo ""
-  echo "Options:"
-  echo "   1. Review the changes: git diff"
-  echo "   2. Stage them: git add ."
-  echo "   3. Amend your commit: git commit --amend --no-edit"
-  echo "   4. Or commit them separately: git commit -m 'chore: apply auto-fixes'"
+  echo "💡 Note: These auto-fixes are safe (ESLint + Prettier formatting)"
+  echo "   You may want to amend your last commit to include them:"
+  echo "   → git commit --amend --no-edit"
   echo ""
-  echo "💡 Tip: The changes are formatted/linted, safe to stage!"
-  echo ""
-  
-  # Ask user if they want to stage the changes
-  read -p "Would you like to stage these changes now? (y/N): " -n 1 -r
-  echo ""
-  if [[ $REPLY =~ ^[Yy]$ ]]; then
-    git add .
-    echo "✅ Changes staged! You may want to amend your commit."
-    echo ""
-  fi
 fi
 
 # Step 4: TypeScript type-check

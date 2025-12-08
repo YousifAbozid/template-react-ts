@@ -13,6 +13,7 @@ fi
 echo "📝 Running lint-staged on staged files..."
 echo "   → Auto-fixing ESLint issues"
 echo "   → Formatting with Prettier"
+echo "   → Auto-staging fixed files"
 echo ""
 
 npx lint-staged || {
@@ -32,7 +33,7 @@ npx lint-staged || {
   exit 1
 }
 
-echo "✅ Lint-staged passed! Files are formatted and linted."
+echo "✅ Lint-staged passed! Files are formatted, linted, and auto-staged."
 echo ""
 
 # Step 2: Type-check staged TypeScript files

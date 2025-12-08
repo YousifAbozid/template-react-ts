@@ -1,18 +1,28 @@
 {
   "name": "template-react-ts",
-  "private": true,
   "version": "1.0.0",
-  "description": "React + TypeScript + Vite + Tailwind CSS + React Router + React Query + Forms Template",
-  "type": "module",
+  "private": true,
+  "description": "✨ Production-ready React template with TypeScript, Vite, Tailwind CSS v4, and comprehensive tooling. Features Zod-based schemas, functional architecture with zero decorators, dark mode support, and complete developer experience. 🚀",
+  "homepage": "https://github.com/YousifAbozid/template-react-ts#readme",
+  "bugs": {
+    "url": "https://github.com/YousifAbozid/template-react-ts/issues"
+  },
   "repository": {
     "type": "git",
-    "url": "https://github.com/YousifAbozid/template-react-ts.git"
+    "url": "git+https://github.com/YousifAbozid/template-react-ts.git"
   },
+  "license": "MIT",
+  "author": {
+    "name": "Yousif Abozid",
+    "email": "yousif.abozid@yahoo.com",
+    "url": "https://github.com/YousifAbozid"
+  },
+  "type": "module",
   "scripts": {
     "dev": "vite",
     "preview": "vite preview",
     "build": "tsc -b && vite build",
-    "build:analyze": "cross-env ANALYZE=true npm run build && npx vite-bundle-analyzer dist",
+    "build:analyze": "ANALYZE=true npm run build && npx vite-bundle-analyzer dist",
     "analyze": "npx vite-bundle-analyzer dist",
     "type-check": "tsc --noEmit --incremental --tsBuildInfoFile .tsbuildinfo",
     "lint": "eslint src --cache --cache-location .eslintcache",
@@ -26,9 +36,6 @@
     "upgrade": "npx npm-check-updates -u && npm install",
     "prepare": "husky"
   },
-  "keywords": [],
-  "author": "Yousif Abozid",
-  "license": "MIT",
   "dependencies": {
     "@hookform/resolvers": "^5.2.2",
     "@tailwindcss/vite": "^4.1.17",
@@ -46,12 +53,11 @@
   "devDependencies": {
     "@eslint/js": "^9.39.1",
     "@tanstack/eslint-plugin-query": "^5.91.2",
-    "@types/node": "^24.10.1",
+    "@types/node": "^24.10.2",
     "@types/react": "^19.2.7",
     "@types/react-dom": "^19.2.3",
     "@types/react-router-dom": "^5.3.3",
     "@vitejs/plugin-react": "^5.1.2",
-    "cross-env": "^10.1.0",
     "eslint": "^9.39.1",
     "eslint-plugin-react": "^7.37.5",
     "eslint-plugin-react-hooks": "^7.0.1",
@@ -60,7 +66,6 @@
     "husky": "^9.1.7",
     "lint-staged": "^16.2.7",
     "prettier": "^3.7.4",
-    "rollup-plugin-visualizer": "^6.0.5",
     "terser": "^5.44.1",
     "typescript": "~5.9.3",
     "typescript-eslint": "^8.49.0",

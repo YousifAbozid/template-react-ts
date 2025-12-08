@@ -195,7 +195,7 @@ const HomePage = () => {
   };
 
   return (
-    <div className="min-h-screen bg-background-primary">
+    <div className="min-h-screen bg-background-primary text-text-primary antialiased">
       {/* Hero Section */}
       <section className="relative overflow-hidden">
         <div className="absolute inset-0 bg-linear-to-br from-accent-primary/10 to-accent-secondary/10"></div>

@@ -121,6 +121,8 @@
   --color-input-border: var(--color-border-primary);
 }
 
+/* ===== Form Element Resets in Base Layer ===== */
+
 @layer base {
   /* Fix mobile layout issues */
   html,

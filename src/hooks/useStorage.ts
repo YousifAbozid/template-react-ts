@@ -117,7 +117,7 @@ export function useSecureStorage(
   (value: string) => Promise<void>,
   () => void,
   boolean,
-  Error | null,
+  Error | null
 ] {
   const [storedValue, setStoredValue] = useState<string>(initialValue);
   const [isLoading, setIsLoading] = useState<boolean>(true);
@@ -149,7 +149,7 @@ export function useSecureStorage(
           name: 'PBKDF2',
           salt,
           iterations: 100000,
-          hash: 'SHA-256',
+          hash: 'SHA-256'
         },
         importedKey,
         { name: 'AES-GCM', length: 256 },
@@ -214,7 +214,7 @@ export function useSecureStorage(
             name: 'PBKDF2',
             salt,
             iterations: 100000,
-            hash: 'SHA-256',
+            hash: 'SHA-256'
           },
           importedKey,
           { name: 'AES-GCM', length: 256 },

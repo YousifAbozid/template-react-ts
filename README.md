@@ -308,7 +308,7 @@ Built-in form demonstrations with React Hook Form + Zod:
 // Example: Type-safe form with Zod validation
 const loginSchema = z.object({
   email: z.string().email('Invalid email address'),
-  password: z.string().min(8, 'Password must be at least 8 characters'),
+  password: z.string().min(8, 'Password must be at least 8 characters')
 });
 
 type LoginFormData = z.infer<typeof loginSchema>;
@@ -444,7 +444,7 @@ const usePosts = () => {
       );
       if (!response.ok) throw new Error('Failed to fetch posts');
       return response.json();
-    },
+    }
   });
 };
 
@@ -458,7 +458,7 @@ const useCreatePost = () => {
         {
           method: 'POST',
           body: JSON.stringify(newPost),
-          headers: { 'Content-Type': 'application/json' },
+          headers: { 'Content-Type': 'application/json' }
         }
       );
       return response.json();
@@ -466,7 +466,7 @@ const useCreatePost = () => {
     onSuccess: () => {
       // Invalidate and refetch posts
       queryClient.invalidateQueries({ queryKey: ['posts'] });
-    },
+    }
   });
 };
 ```
@@ -496,11 +496,11 @@ const registrationSchema = z
         'Password must contain uppercase, lowercase, and number'
       ),
     confirmPassword: z.string(),
-    name: z.string().min(2, 'Name must be at least 2 characters'),
+    name: z.string().min(2, 'Name must be at least 2 characters')
   })
   .refine(data => data.password === data.confirmPassword, {
     message: "Passwords don't match",
-    path: ['confirmPassword'],
+    path: ['confirmPassword']
   });
 
 type RegistrationFormData = z.infer<typeof registrationSchema>;
@@ -513,9 +513,9 @@ const RegistrationForm = () => {
   const {
     register,
     handleSubmit,
-    formState: { errors, isSubmitting },
+    formState: { errors, isSubmitting }
   } = useForm<RegistrationFormData>({
-    resolver: zodResolver(registrationSchema),
+    resolver: zodResolver(registrationSchema)
   });
 
   const onSubmit = async (data: RegistrationFormData) => {
@@ -904,7 +904,7 @@ const AdvancedThemeToggle = () => {
     { value: 'light', label: 'Light', icon: '☀️' },
     { value: 'dark', label: 'Dark', icon: '🌙' },
     { value: 'high-contrast', label: 'High Contrast', icon: '🔲' },
-    { value: 'sepia', label: 'Sepia', icon: '📜' },
+    { value: 'sepia', label: 'Sepia', icon: '📜' }
   ];
 
   return (
@@ -938,7 +938,7 @@ const useThemeCustomization = () => {
     // Reset to default values
     const defaults = {
       'l-bg-1': '#ffffff',
-      'accent-1': '#58a6ff',
+      'accent-1': '#58a6ff'
       // ... other defaults
     };
 
@@ -1324,9 +1324,9 @@ export default defineConfig({
   plugins: [
     // ... other plugins
     legacy({
-      targets: ['defaults', 'not IE 11'],
-    }),
-  ],
+      targets: ['defaults', 'not IE 11']
+    })
+  ]
 });
 ```
 
@@ -1522,7 +1522,7 @@ import { useLocalStorage } from '@/hooks';
 const MyComponent = () => {
   const [user, setUser, removeUser] = useLocalStorage('user', {
     name: '',
-    email: '',
+    email: ''
   });
 
   return (

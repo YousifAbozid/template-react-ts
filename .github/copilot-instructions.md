@@ -83,7 +83,7 @@ import type { FormState, FormFieldError } from '@/types';
 // Follow Zod schema pattern:
 const schema = z.object({
   email: z.string().email('Invalid email'),
-  password: z.string().min(8, 'Min 8 characters'),
+  password: z.string().min(8, 'Min 8 characters')
 });
 
 type FormData = z.infer<typeof schema>;
@@ -112,7 +112,7 @@ import {
   API_CONFIG,
   TOAST_CONFIG,
   THEME_CONFIG,
-  BREAKPOINTS,
+  BREAKPOINTS
 } from '@/utils/constants';
 
 // Don't hardcode values that exist in constants

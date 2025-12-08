@@ -17,16 +17,16 @@ export default defineConfig({
       '@/lib': path.resolve(__dirname, './src/lib'),
       '@/features': path.resolve(__dirname, './src/features'),
       '@/styles': path.resolve(__dirname, './src/styles'),
-      '@/app': path.resolve(__dirname, './src/app'),
-    },
+      '@/app': path.resolve(__dirname, './src/app')
+    }
   },
   server: {
     port: 3000,
-    open: true,
+    open: true
   },
   build: {
     outDir: 'dist',
     minify: 'terser',
-    sourcemap: true,
-  },
+    sourcemap: true
+  }
 });

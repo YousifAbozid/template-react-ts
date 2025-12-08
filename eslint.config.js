@@ -15,8 +15,8 @@ export default [
       '.tsbuildinfo',
       'eslint.config.js',
       'vite.config.*',
-      '**/*.config.js',
-    ],
+      '**/*.config.js'
+    ]
   },
 
   js.configs.recommended,
@@ -36,15 +36,15 @@ export default [
       parser: tsEslint.parser,
       parserOptions: {
         project: './tsconfig.app.json',
-        tsconfigRootDir: process.cwd(),
+        tsconfigRootDir: process.cwd()
       },
       globals: globals.browser,
-      ecmaVersion: 'latest',
+      ecmaVersion: 'latest'
     },
     plugins: {
       react: pluginReact,
       'react-hooks': reactHooks,
-      'react-refresh': reactRefresh,
+      'react-refresh': reactRefresh
     },
     rules: {
       // React rules
@@ -57,26 +57,27 @@ export default [
       // TypeScript
       '@typescript-eslint/no-unused-vars': [
         'warn',
-        { argsIgnorePattern: '^_' },
+        { argsIgnorePattern: '^_' }
       ],
 
       // ❗ turn off bad-fit rules
       '@typescript-eslint/no-confusing-void-expression': 'off',
       'import/no-unresolved': 'off',
       'react-hooks/exhaustive-deps': 'off',
+      'react/prop-types': 'off',
 
       // Turn off strict TS rules
       '@typescript-eslint/no-unsafe-return': 'off',
-      '@typescript-eslint/no-misused-promises': 'off',
+      '@typescript-eslint/no-misused-promises': 'off'
     },
 
     settings: {
       react: { version: 'detect' },
       'import/resolver': {
         typescript: {
-          project: './tsconfig.app.json',
-        },
-      },
-    },
-  },
+          project: './tsconfig.app.json'
+        }
+      }
+    }
+  }
 ];

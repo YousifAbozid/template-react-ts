@@ -3,7 +3,7 @@ import {
   useContext,
   useState,
   ReactNode,
-  useCallback,
+  useCallback
 } from 'react';
 
 export type ToastType = 'success' | 'error' | 'warning' | 'info';
@@ -58,7 +58,7 @@ export function ToastProvider({ children }: { children: ReactNode }) {
         message,
         createdAt: Date.now(),
         position: position || 'bottom-right',
-        duration,
+        duration
       };
 
       setToasts(currentToasts => [...currentToasts, newToast]);

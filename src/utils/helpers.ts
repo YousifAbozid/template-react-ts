@@ -22,7 +22,7 @@ export function formatDate(
     year: 'numeric',
     month: 'long',
     day: 'numeric',
-    ...options,
+    ...options
   }).format(dateObj);
 }
 

@@ -35,7 +35,7 @@ export class ErrorBoundary extends Component<Props, State> {
 
     this.setState({
       error,
-      errorInfo,
+      errorInfo
     });
 
     // Here you could also log the error to an error reporting service

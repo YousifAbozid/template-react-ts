@@ -70,26 +70,26 @@ export default function Toast({ toast, onRemove }: ToastProps) {
         return {
           icon: <Check className="w-5 h-5" />,
           bgColor: 'bg-accent-success text-text-inverse',
-          progressColor: 'bg-text-inverse/60',
+          progressColor: 'bg-text-inverse/60'
         };
       case 'error':
         return {
           icon: <AlertCircle className="w-5 h-5" />,
           bgColor: 'bg-accent-error text-text-inverse',
-          progressColor: 'bg-text-inverse/60',
+          progressColor: 'bg-text-inverse/60'
         };
       case 'warning':
         return {
           icon: <AlertTriangle className="w-5 h-5" />,
           bgColor: 'bg-accent-warning text-text-inverse',
-          progressColor: 'bg-text-inverse/60',
+          progressColor: 'bg-text-inverse/60'
         };
       case 'info':
       default:
         return {
           icon: <Info className="w-5 h-5" />,
           bgColor: 'bg-accent-info text-text-inverse',
-          progressColor: 'bg-text-inverse/60',
+          progressColor: 'bg-text-inverse/60'
         };
     }
   };
@@ -107,7 +107,7 @@ export default function Toast({ toast, onRemove }: ToastProps) {
           className={`${bgColor} rounded-lg shadow-lg flex flex-col w-full max-w-md mx-auto overflow-hidden md:mx-0`}
           style={{
             minWidth: '280px',
-            maxWidth: '100%',
+            maxWidth: '100%'
           }}
           role="alert"
         >

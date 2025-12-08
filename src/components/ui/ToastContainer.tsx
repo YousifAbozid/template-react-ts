@@ -13,7 +13,7 @@ export default function ToastContainer() {
       'top-right': [],
       'bottom-left': [],
       'bottom-center': [],
-      'bottom-right': [],
+      'bottom-right': []
     };
 
     toasts.forEach(toast => {
@@ -33,7 +33,7 @@ export default function ToastContainer() {
     'bottom-left': 'bottom-4 left-4 items-start',
     'bottom-center':
       'bottom-4 left-1/2 -translate-x-1/2 items-center md:bottom-4',
-    'bottom-right': 'bottom-4 right-4 items-end md:flex hidden', // Hide on mobile
+    'bottom-right': 'bottom-4 right-4 items-end md:flex hidden' // Hide on mobile
   };
 
   // Special position for mobile - always use bottom-center on smaller screens

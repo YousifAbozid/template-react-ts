@@ -71,7 +71,7 @@ export interface StorageError {
 export type StorageHookReturn<T> = [
   value: T,
   setValue: (value: T | ((prevValue: T) => T)) => void,
-  removeValue: () => void,
+  removeValue: () => void
 ];
 
 export type SecureStorageHookReturn = [
@@ -79,7 +79,7 @@ export type SecureStorageHookReturn = [
   setValue: (value: string) => Promise<void>,
   removeValue: () => void,
   isLoading: boolean,
-  error: Error | null,
+  error: Error | null
 ];
 
 // Generic utility types

@@ -1,8 +1,6 @@
-'use client';
-
-import React, { createContext, useContext, useEffect } from 'react';
-import { useLocalStorage } from '@/hooks';
-import { THEME_CONFIG } from '@/utils/constants';
+import { createContext, useContext, useEffect } from 'react';
+import { useLocalStorage } from '@/shared/hooks';
+import { THEME_CONFIG } from '@/shared/utils/constants';
 
 type Theme = 'dark' | 'light' | 'system';
 

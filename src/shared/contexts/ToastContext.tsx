@@ -43,6 +43,10 @@ export function ToastProvider({ children }: { children: ReactNode }) {
   const [toasts, setToasts] = useState<Toast[]>([]);
   const [position, setPosition] = useState<ToastPosition>('bottom-right');
 
+  const removeToast = useCallback((id: string) => {
+    setToasts(currentToasts => currentToasts.filter(toast => toast.id !== id));
+  }, []);
+
   const notify = useCallback(
     (
       type: ToastType,
@@ -68,12 +72,8 @@ export function ToastProvider({ children }: { children: ReactNode }) {
         removeToast(id);
       }, duration);
     },
-    []
+    [removeToast]
   );
-
-  const removeToast = useCallback((id: string) => {
-    setToasts(currentToasts => currentToasts.filter(toast => toast.id !== id));
-  }, []);
 
   return (
     <ToastContext.Provider

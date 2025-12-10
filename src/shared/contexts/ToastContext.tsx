@@ -52,7 +52,7 @@ export function ToastProvider({ children }: { children: ReactNode }) {
       type: ToastType,
       message: string,
       position?: ToastPosition,
-      duration: number = 3000
+      duration: number = 5000
     ) => {
       const id = `toast-${Date.now()}-${Math.random().toString(36).substring(2, 9)}`;
 

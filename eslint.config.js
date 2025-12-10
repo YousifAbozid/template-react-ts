@@ -1,66 +1,108 @@
-import globals from 'globals';
 import js from '@eslint/js';
-import tsEslint from 'typescript-eslint';
-import pluginReact from 'eslint-plugin-react';
+import globals from 'globals';
+import ts from 'typescript-eslint';
+import react from 'eslint-plugin-react';
 import reactHooks from 'eslint-plugin-react-hooks';
 import reactRefresh from 'eslint-plugin-react-refresh';
-import pluginQuery from '@tanstack/eslint-plugin-query';
+import query from '@tanstack/eslint-plugin-query';
 
 export default [
+  //
+  // 1. Ignore build folders
+  //
   {
-    ignores: [
-      'dist/**',
-      'node_modules/**',
-      '.eslintcache',
-      '.tsbuildinfo',
-      'eslint.config.js',
-      'vite.config.*',
-      '**/*.config.js'
-    ]
+    ignores: ['dist/**', 'node_modules/**', '.eslintcache', '*.tsbuildinfo']
   },
 
+  //
+  // 2. JavaScript + TypeScript recommended rules
+  //
   js.configs.recommended,
-  ...tsEslint.configs.recommended,
-  pluginReact.configs.flat.recommended,
-  ...pluginQuery.configs['flat/recommended'],
+  ...ts.configs.recommended,
+  // ...ts.configs.recommendedTypeChecked, // IMPORTANT: Type-aware linting
 
+  //
+  // 3. React + TanStack Query plugins
+  //
+  react.configs.flat.recommended,
+  ...query.configs['flat/recommended'],
+
+  //
+  // 4. Project-specific rules
+  //
   {
-    files: ['**/*.{ts,tsx}'],
+    files: ['src/**/*.{ts,tsx}'],
     languageOptions: {
-      parser: tsEslint.parser,
+      parser: ts.parser,
       parserOptions: {
         project: './tsconfig.app.json',
-        tsconfigRootDir: process.cwd()
+        tsconfigRootDir: import.meta.dirname
       },
-      globals: globals.browser,
-      ecmaVersion: 'latest'
+      globals: globals.browser
     },
+
     plugins: {
-      react: pluginReact,
+      react,
       'react-hooks': reactHooks,
       'react-refresh': reactRefresh
-    },
-    rules: {
-      // React rules
-      'react/react-in-jsx-scope': 'off',
-      'react/jsx-uses-react': 'off',
-      'react/prop-types': 'off',
-
-      // React Hooks
-      'react-hooks/rules-of-hooks': 'error',
-      'react-hooks/exhaustive-deps': 'warn',
-
-      // TypeScript
-      '@typescript-eslint/no-unused-vars': [
-        'warn',
-        { argsIgnorePattern: '^_' }
-      ],
-      '@typescript-eslint/explicit-function-return-type': 'off',
-      '@typescript-eslint/no-explicit-any': 'warn'
     },
 
     settings: {
       react: { version: 'detect' }
+    },
+
+    rules: {
+      //
+      // React
+      //
+      'react/react-in-jsx-scope': 'off', // Vite auto-import
+      'react/jsx-uses-react': 'off',
+      'react/prop-types': 'off', // Using TypeScript instead
+
+      //
+      // React Hooks
+      //
+      'react-hooks/rules-of-hooks': 'error',
+      'react-hooks/exhaustive-deps': 'warn',
+
+      //
+      // TypeScript rules
+      //
+      '@typescript-eslint/no-unused-vars': [
+        'warn',
+        { argsIgnorePattern: '^_', varsIgnorePattern: '^_' }
+      ],
+
+      '@typescript-eslint/no-explicit-any': 'warn', // Allow but warn
+      '@typescript-eslint/explicit-function-return-type': 'off',
+      '@typescript-eslint/no-floating-promises': 'error', // Very important
+      '@typescript-eslint/no-misused-promises': [
+        'error',
+        {
+          checksVoidReturn: {
+            arguments: false,
+            attributes: false // allow async in JSX attributes (safe for forms)
+          }
+        }
+      ],
+
+      //
+      // Sensible TS safety rules (no overkill)
+      //
+      '@typescript-eslint/no-unsafe-assignment': 'off',
+      '@typescript-eslint/no-unsafe-call': 'off',
+      '@typescript-eslint/no-unsafe-return': 'off',
+      '@typescript-eslint/no-unsafe-member-access': 'off',
+
+      '@typescript-eslint/prefer-optional-chain': 'error',
+
+      //
+      // Vite + React Fast Refresh
+      //
+      'react-refresh/only-export-components': [
+        'off',
+        { allowConstantExport: true }
+      ]
     }
   }
 ];

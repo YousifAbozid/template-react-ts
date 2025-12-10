@@ -61,7 +61,8 @@ const Toast = ({ toast, onRemove }: ToastProps) => {
       const timer = setTimeout(onRemove, animationDuration);
       return () => clearTimeout(timer);
     }
-  }, [visible, onRemove]);
+    return () => {}; // Return empty cleanup function when visible is true
+  }, [visible, onRemove, animationDuration]);
 
   // Get the appropriate icon and background color based on toast type
   const getToastStyles = () => {
